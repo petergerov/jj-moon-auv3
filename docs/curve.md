@@ -3,40 +3,44 @@
 The reason jj-moon exists — and the first block in the chain.
 
 A fixed multi-band target shape aimed at well-mic'd acoustic guitar
-recordings. It does not try to *become* any one record; it applies a gentle,
-musically useful correction toward that neighbourhood: rumble out, body in,
-boxiness out, a soft mid dip so presence has room, string detail, and air on
-top, with a touch of soft saturation so a DI does not sound like a pencil
-drawing of a guitar.
+recordings. Two voices share the same knobs but different targets:
+
+| Voice | For | Character |
+|---|---|---|
+| **Steel** | Western / steel-string | Body ~140 Hz, presence ~2.8–5 kHz, open air |
+| **Nylon** | Concert / classical / Spanish | Warmer chest ~200 Hz, softer presence ~2.2–3.8 kHz, earlier top |
 
 Tuned against reference material such as `sample/TheLastFallenLeaf.mp3`
-(strong 80–250 Hz body, smooth downhill through the mids, restrained air).
+for Steel (strong 80–250 Hz body, smooth downhill through the mids).
 
 ## Controls
 
 | Control | Range | What it does |
 |---|---|---|
+| **STEEL / NYLON** | tabs | Selects the target curve. |
 | **Curve** | 0–100 % | Dry/wet of the whole target curve. 0 % is flat bypass. |
-| **Wood** | 0–100 % | Body vs sparkle. Up = warmer/fuller (~140 Hz shelf, darker top). Down = more air shelf. |
-| **Presence** | 0–100 % | String detail. 0 % gently cuts the harsh 2.8 kHz band (−2.5 dB); 100 % is a clear lift (+7 dB) plus a 5 kHz sheen. Keep it low on harsh piezo. |
-| **On/Off** | | Bypass for Curve only. DSP keeps running, so switching back is click-free. |
+| **Wood** | 0–100 % | Body vs sparkle. Centre frequency follows the voice. |
+| **Presence** | 0–100 % | String detail. 0 % gently cuts harshness; 100 % lifts attack/sheen. Keep it low on harsh piezo. |
+| **On/Off** | | Bypass for Curve only. |
 
-## What moves under the hood
+## Steel under the hood
 
-At full Amount with middle Wood / Presence settings, roughly:
+- High-pass ~68 Hz; body shelf ~140 Hz
+- Box cut ~360 Hz; mid dip ~820 Hz
+- Presence ~2.8 kHz (−2.5…+7 dB) + sheen ~5.2 kHz
+- Air shelf ~7.8 kHz; top roll-off follows Wood
 
-- High-pass ~68 Hz
-- Low shelf ~140 Hz (Wood scales the boost)
-- Peak cut ~360 Hz (boxiness; deeper with more Wood)
-- Mild mid dip ~820 Hz
-- Presence peak ~2.8 kHz (−2.5 dB at 0 % … +7 dB at 100 %), wider Q
-- Sheen peak ~5.2 kHz (engages above ~35 % Presence)
-- High shelf ~7.8 kHz (stronger when Wood is down)
-- Soft low-pass that darkens as Wood goes up
-- Gentle tanh saturation keyed off Wood
+## Nylon under the hood
+
+- High-pass ~55 Hz; body shelf ~200 Hz (fuller chest)
+- Softer box cut ~280 Hz; mid dip ~1.1 kHz
+- Presence ~2.2 kHz (milder) + soft sheen ~3.8 kHz
+- Air shelf ~5.6 kHz; earlier top — nylon does not want steel sparkle
+- Gentler saturation
 
 ## What to reach for
 
-- **Piezo Soft** — high Curve, high Wood, low Presence
-- **Fingerstyle** — less Wood, more Presence
+- **Piezo Soft** — Steel, high Curve, high Wood, low Presence
+- **Nylon** / **Spanish Soft** — Nylon voice, warmer Wood
+- **Concert Hall** — Nylon with more Space
 - **Curve Only** — hear the shape alone with Comp / Width / Space off

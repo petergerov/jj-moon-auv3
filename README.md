@@ -18,10 +18,9 @@ In → trim → [CURVE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mi
 ```
 
 - **CURVE** — the reason this plug-in exists. A fixed multi-band target
-  curve aimed at well-mic'd acoustic recordings (body around 140 Hz, boxiness
-  out, soft mid dip, string presence, air on top). One Amount, plus Wood
-  (body vs sparkle) and Presence. Tuned against reference material such as
-  `sample/TheLastFallenLeaf.mp3`.
+  curve aimed at well-mic'd acoustic recordings, with a **Steel / Nylon**
+  voice switch (western steel-string vs concert / Spanish nylon). One Amount,
+  plus Wood and Presence.
 - **COMP** — optical compressor with program-dependent release. Soft defaults
   for acoustic dynamics.
 - **WIDTH** — breeze micro-pitch + short delay stereo image, with a Focus
@@ -74,8 +73,9 @@ Open the app once so the Audio Unit registers.
 
 ## Factory presets
 
-Nine, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
-Stereo Porch, Close Mic, Moon Room, Strum, Curve Only.
+Twelve, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
+Stereo Porch, Close Mic, Moon Room, Strum, Curve Only, Nylon, Concert Hall,
+Spanish Soft. The last three use the Nylon voice.
 
 User presets: tap the preset window → **Save As…**; swipe left to rename or delete.
 

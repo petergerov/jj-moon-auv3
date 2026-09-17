@@ -22,6 +22,9 @@ public class SimplePlayEngine {
         case partFive = "5"
         case partSix = "6"
         case microphone = "Mic"
+        /// External audio interface / USB / line-in — same live path as Mic,
+        /// but prefers a non-built-in input and does not force the speaker.
+        case usb = "USB"
         var id: String { rawValue }
 
         /// Bundle resource holding this source's audio, or nil for live input.
@@ -33,11 +36,19 @@ public class SimplePlayEngine {
             case .partFour: return "nylon-1"
             case .partFive: return "nylon-2"
             case .partSix: return "nylon-3"
-            case .microphone: return nil
+            case .microphone, .usb: return nil
             }
         }
 
         var isLoop: Bool { resourceName != nil }
+
+        /// Built-in mic or an external interface — anything that needs record permission.
+        var isLive: Bool {
+            switch self {
+            case .microphone, .usb: return true
+            default: return false
+            }
+        }
 
         /// What the visual label would say if there were room for it.
         var spokenName: String {
@@ -48,7 +59,8 @@ public class SimplePlayEngine {
             case .partFour: return "Nylon 1"
             case .partFive: return "Nylon 2"
             case .partSix: return "Nylon 3"
-            case .microphone: return "Microphone"
+            case .microphone: return "Built-in microphone"
+            case .usb: return "USB audio interface"
             }
         }
     }
@@ -154,7 +166,7 @@ public class SimplePlayEngine {
         }
         guard !isPlaying else { return }
 
-        if source == .microphone {
+        if source.isLive {
             let granted = await AVAudioApplication.requestRecordPermission()
             guard granted else {
                 lastError = "Microphone access is off. Pick a guitar part, or allow the mic in Settings."
@@ -266,8 +278,10 @@ public class SimplePlayEngine {
             let input = engine.inputNode
             let inputFormat = input.outputFormat(forBus: 0)
             guard inputFormat.sampleRate > 0, inputFormat.channelCount > 0 else {
-                lastError = "Microphone is not ready. Unplug accessories and try again."
-                log.error("Microphone format is not ready")
+                lastError = self.source == .usb
+                    ? "No USB / interface input. Plug in a class-compliant interface, then try again."
+                    : "Microphone is not ready. Unplug accessories and try again."
+                log.error("Live input format is not ready (\(self.source.rawValue, privacy: .public))")
                 return false
             }
             engine.connect(input, to: avAudioUnit, format: inputFormat)
@@ -335,13 +349,66 @@ public class SimplePlayEngine {
         do {
             if source.isLoop {
                 try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                try session.setActive(true)
+            } else if source == .usb {
+                // No `.defaultToSpeaker` — let a USB / Lightning / USB-C interface
+                // own both input and monitor output when it is the route.
+                try session.setCategory(.playAndRecord, mode: .default, options: [
+                    .mixWithOthers,
+                    .allowBluetoothHFP,
+                ])
+                try session.setActive(true)
+                preferExternalInput(on: session)
             } else {
-                try session.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+                try session.setCategory(.playAndRecord, mode: .default, options: [
+                    .defaultToSpeaker,
+                    .mixWithOthers,
+                ])
+                try session.setActive(true)
+                preferBuiltInMic(on: session)
             }
-            try session.setActive(true)
         } catch {
             lastError = "Audio session failed: \(error.localizedDescription)"
             log.error("Audio session failed: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    /// Prefer the built-in mic so a plugged-in interface does not silently
+    /// steal the Mic source.
+    private func preferBuiltInMic(on session: AVAudioSession) {
+        guard let builtIn = session.availableInputs?.first(where: { $0.portType == .builtInMic })
+        else { return }
+        do {
+            try session.setPreferredInput(builtIn)
+        } catch {
+            log.error("Could not prefer built-in mic: \(error.localizedDescription, privacy: .public)")
+        }
+    }
+
+    /// Prefer a USB / line / headset input over the built-in mic.
+    private func preferExternalInput(on session: AVAudioSession) {
+        let preferredOrder: [AVAudioSession.Port] = [
+            .usbAudio,
+            .lineIn,
+            .headsetMic,
+        ]
+        guard let inputs = session.availableInputs else {
+            lastError = "No audio inputs available."
+            return
+        }
+        let match = preferredOrder.compactMap { port in inputs.first(where: { $0.portType == port }) }.first
+            ?? inputs.first(where: { $0.portType != .builtInMic })
+        guard let preferred = match else {
+            lastError = "No USB / interface input found. Plug one in, then tap Play."
+            log.error("USB source selected but only built-in mic is available")
+            return
+        }
+        do {
+            try session.setPreferredInput(preferred)
+            log.info("Preferred input: \(preferred.portName, privacy: .public) (\(preferred.portType.rawValue, privacy: .public))")
+        } catch {
+            lastError = "Could not select \(preferred.portName): \(error.localizedDescription)"
+            log.error("setPreferredInput failed: \(error.localizedDescription, privacy: .public)")
         }
     }
 

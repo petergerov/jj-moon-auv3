@@ -82,8 +82,8 @@ User presets: tap the preset window → **Save As…**; swipe left to rename or 
 
 ## Demo parts
 
-The container app bundles six acoustic recordings plus Mic. Picker labels
-are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
+The container app bundles six acoustic recordings plus Mic and USB. Picker
+labels are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
 
 | Segment | File | Spoken name |
 |---|---|---|
@@ -93,6 +93,11 @@ are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
 | **4** | `loop/nylon-1.mp3` | Nylon 1 |
 | **5** | `loop/nylon-2.mp3` | Nylon 2 |
 | **6** | `loop/nylon-3.mp3` | Nylon 3 |
+| **Mic** | built-in mic | Built-in microphone |
+| **USB** | USB / line / headset input | USB audio interface |
+
+**USB** prefers a class-compliant interface (no forced speaker route). Plug the
+interface in before tapping Play.
 
 Decoded on demand rather than at launch. See `SimplePlayEngine.Source`.
 
@@ -127,6 +132,7 @@ should be carried across by hand until a local `JJKit` package exists.
 ```sh
 swift icon/make-icon.swift         # -> JJMoon/Assets.xcassets/.../AppIcon.png
 screenshots/make-screenshots.sh    # -> screenshots/store/ + docs/images/
+screenshots/make-iap-review.sh     # -> screenshots/store/AppReview-IAP-unlock.png (640×920)
 ```
 
 `make-icon.swift` draws the panel family composition in the Moonlight

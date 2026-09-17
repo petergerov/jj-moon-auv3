@@ -54,6 +54,7 @@ struct PaywallView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(GearTheme.accent)
                 .disabled(entitlement.isPurchasing || entitlement.unlockProduct == nil)
+                .accessibilityIdentifier("iap.unlock")
 
                 Button("Restore purchases") {
                     Task { await entitlement.restorePurchases() }
@@ -100,7 +101,7 @@ struct PaywallView: View {
     private var headline: String {
         switch entitlement.accessState {
         case .trialExpired:
-            return "Your free trial has ended. Unlock to keep Shift, Vibrato, and Warmth."
+            return "Your free trial has ended. Unlock to keep the acoustic curve."
         case .trialActive:
             return "Enjoying the trial? Unlock once to keep the effect forever."
         case .unlocked:

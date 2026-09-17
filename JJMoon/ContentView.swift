@@ -17,6 +17,11 @@ struct ContentView: View {
         .task {
             await entitlement.loadProducts()
             await entitlement.refresh()
+            // Forced open for the IAP App Review screenshot generator.
+            if ProcessInfo.processInfo.arguments.contains("-AppReviewPaywall") {
+                showPaywall = true
+                return
+            }
             // Only prompt when the install trial has ended — never on first launch.
             if case .trialExpired = entitlement.accessState {
                 showPaywall = true

@@ -103,16 +103,30 @@ final class ScreenshotTests: XCTestCase {
         capture("03-presets")
     }
 
-    // There is deliberately no paywall shot. Two reasons: the price on that
-    // sheet is whatever the viewer's storefront charges, and a screenshot
-    // freezes one currency onto a listing sold in every country; and the
-    // sheet only prices itself once StoreKit has loaded the product, which
-    // under `xcodebuild test` it does not — xcodegen writes the scheme's
-    // .storekit reference into the Launch action only, so the run action
-    // gets it and the test action does not, and the shot came back with the
-    // button greyed out and "Unlock product not available yet." across it.
-    // The trial terms belong in the description text, where they can be
-    // edited without a new binary.
+    // Marketing listing shots stop here. The IAP App Review screenshot is a
+    // separate capture (`testAppReviewPaywall`) — Apple wants the unlock UI
+    // at 640×920 for the in-app purchase record, which is not a Store listing
+    // image and must not freeze a storefront price into the carousel.
+
+    /// Paywall for App Store Connect → In-App Purchase → Review Screenshot.
+    /// Launches with `-AppReviewPaywall` so the sheet opens without waiting
+    /// for trial expiry. StoreKit Configuration on the screenshots scheme
+    /// supplies the $2.99 price.
+    func testAppReviewPaywall() {
+        // Own launch — do not reuse setUp's clean editor session.
+        app.terminate()
+        app = XCUIApplication()
+        app.launchArguments = ["-AppReviewPaywall"]
+        XCUIDevice.shared.orientation = .portrait
+        app.launch()
+
+        let unlock = app.descendants(matching: .any)["iap.unlock"]
+        XCTAssertTrue(unlock.waitForExistence(timeout: 30),
+                      "Paywall unlock button never appeared — StoreKit or -AppReviewPaywall failed.")
+        // Let StoreKit fill the price label and the lamps settle.
+        sleep(3)
+        capture("04-iap-review")
+    }
 
     /// `app.screenshot()`, not `XCUIScreen.main.screenshot()`. The screen
     /// hands back the physical framebuffer — on a rotated iPad that is

@@ -25,7 +25,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>jj-moon uses the microphone so you can hear the effect on live audio in this test host.</string>
+	<string>jj-moon uses the microphone or a connected USB audio interface so you can hear the effect on live audio in this test host.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UISupportedInterfaceOrientations</key>

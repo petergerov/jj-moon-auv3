@@ -115,6 +115,9 @@ def strip_exif(data):
 for test in json.load(open(os.path.join(src, "manifest.json"))):
     for a in test.get("attachments", []):
         name = a["suggestedHumanReadableName"].split("_")[0] + ".png"
+        # IAP review shot is produced by make-iap-review.sh, not the Store carousel.
+        if name.startswith("04-"):
+            continue
         raw = open(os.path.join(src, a["exportedFileName"]), "rb").read()
         clean, orientation = strip_exif(raw)
         open(os.path.join(dst, name), "wb").write(clean)

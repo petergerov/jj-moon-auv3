@@ -214,6 +214,16 @@ These match `Configuration/Products.storekit` and
 `JJMoonExtension/Parameters/PurchaseProducts.swift` — all three have to
 agree or the paywall shows "Unlock product not available yet."
 
+**Review Screenshot** (required on the IAP record — 640×920, RGB, no alpha):
+
+```sh
+screenshots/make-iap-review.sh
+```
+
+Upload `screenshots/store/AppReview-IAP-unlock.png` into App Store Connect →
+In-App Purchases → jj-moon Unlock → App Store Review Information → Screenshot.
+This is only for the reviewer; it is not a Store listing image.
+
 ---
 
 ## Screenshots
@@ -309,7 +319,7 @@ the effect can be reviewed without installing a DAW:
    on/off switch so their contribution can be heard individually.
 3. Tap the preset window at the top to load any of the 15 factory presets.
    Try Steel / Nylon / FLAME on the Shape section, or load Flamenco / Rasgueado.
-4. Use the segmented control (1–6 / Mic) to switch demo parts.
+4. Use the segmented control (1–6 / Mic / USB) to switch demo parts or live input.
 
 To review it as a plug-in inside another app (optional):
 
@@ -329,7 +339,7 @@ launch, so the app and the plug-in extension agree on how much trial is left
 whichever one the user opens first.
 
 MICROPHONE
-The microphone is optional and used only to feed live audio through the
+The microphone / USB input is optional and used only to feed live audio through the
 effect in the standalone player. Six acoustic recordings are bundled so
 the app can be reviewed without granting it.
 ```

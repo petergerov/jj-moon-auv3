@@ -48,7 +48,7 @@ targets:
       - path: JJMoonExtension/Common/UI
         excludes:
           - AudioUnitViewController.swift
-      # Five acoustic demos + Mic in the companion app picker. See
+      # Six acoustic demos + Mic in the companion app picker. See
       # SimplePlayEngine.Source for order and spoken names.
       - path: loop/acoustic-guitar-melody-calm.mp3
         type: file
@@ -56,13 +56,16 @@ targets:
       - path: loop/chillin-acoustic-guitar.mp3
         type: file
         buildPhase: resources
-      - path: loop/acoustic-guitar-chords.mp3
-        type: file
-        buildPhase: resources
       - path: loop/acoustic-guitar-chords-loneliness.mp3
         type: file
         buildPhase: resources
-      - path: loop/sad-acoustic-guitar-melody.mp3
+      - path: loop/nylon-1.mp3
+        type: file
+        buildPhase: resources
+      - path: loop/nylon-2.mp3
+        type: file
+        buildPhase: resources
+      - path: loop/nylon-3.mp3
         type: file
         buildPhase: resources
     settings:

@@ -33,5 +33,9 @@ typedef NS_ENUM(AUParameterAddress, JJMoonParameterAddress) {
     masterOutput,
 
     // Input trim last so saved addresses never renumber mid-list.
-    masterInput
+    masterInput,
+
+    // Curve voice — appended so existing addresses keep their numbers.
+    // 0 = Steel, 1 = Nylon (concert), 2 = Flamenco.
+    curveVoice
 };

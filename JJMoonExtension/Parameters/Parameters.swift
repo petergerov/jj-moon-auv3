@@ -1,10 +1,19 @@
 import Foundation
 import AudioToolbox
 
+/// Curve target voice — steel-string, nylon concert, or flamenco.
+enum JJMoonCurveVoices {
+    static let names = ["Steel", "Nylon", "Flamenco"]
+    static let steel = 0
+    static let nylon = 1
+    static let flamenco = 2
+    static let defaultIndex = steel
+}
+
 let JJMoonParameterSpecs = ParameterTreeSpec {
-    ParameterGroupSpec(identifier: "curve", name: "Curve") {
+    ParameterGroupSpec(identifier: "curve", name: "Shape") {
         // One Amount for the whole target curve — the point of the plug-in.
-        // Wood and Presence are character, not a second EQ.
+        // Wood and Presence are character; Voice picks the target shape.
         ParameterSpec(address: .curveAmount, identifier: "curveAmount", name: "Curve",
                       units: .percent, valueRange: 0.0...100.0, defaultValue: 68.0, unitName: "%")
         ParameterSpec(address: .curveWood, identifier: "curveWood", name: "Wood",
@@ -13,6 +22,11 @@ let JJMoonParameterSpecs = ParameterTreeSpec {
                       units: .percent, valueRange: 0.0...100.0, defaultValue: 42.0, unitName: "%")
         ParameterSpec(address: .curveOn, identifier: "curveOn", name: "Curve On",
                       units: .boolean, valueRange: 0.0...1.0, defaultValue: 1.0)
+        ParameterSpec(address: .curveVoice, identifier: "curveVoice", name: "Voice",
+                      units: .indexed,
+                      valueRange: 0.0...AUValue(JJMoonCurveVoices.names.count - 1),
+                      defaultValue: AUValue(JJMoonCurveVoices.defaultIndex),
+                      valueStrings: JJMoonCurveVoices.names)
     }
     ParameterGroupSpec(identifier: "comp", name: "Comp") {
         ParameterSpec(address: .compAmount, identifier: "compAmount", name: "Comp",

@@ -93,6 +93,7 @@ public:
             case JJMoonParameterAddress::curveWood:     mCurveWood = value; break;
             case JJMoonParameterAddress::curvePresence: mCurvePresence = value; break;
             case JJMoonParameterAddress::curveOn:       mCurveOn = value; break;
+            case JJMoonParameterAddress::curveVoice:    mCurveVoice = value; break;
             case JJMoonParameterAddress::compAmount:    mCompAmount = value; break;
             case JJMoonParameterAddress::compAttack:    mCompAttack = value; break;
             case JJMoonParameterAddress::compRelease:   mCompRelease = value; break;
@@ -123,6 +124,7 @@ public:
             case JJMoonParameterAddress::curveWood:     return mCurveWood;
             case JJMoonParameterAddress::curvePresence: return mCurvePresence;
             case JJMoonParameterAddress::curveOn:       return mCurveOn;
+            case JJMoonParameterAddress::curveVoice:    return mCurveVoice;
             case JJMoonParameterAddress::compAmount:    return mCompAmount;
             case JJMoonParameterAddress::compAttack:    return mCompAttack;
             case JJMoonParameterAddress::compRelease:   return mCompRelease;
@@ -198,6 +200,8 @@ public:
 
         curveL.setAmount(curveIsOn ? mCurveAmount * 0.01f : 0.0f);
         curveR.setAmount(curveIsOn ? mCurveAmount * 0.01f : 0.0f);
+        curveL.setVoice((int) std::lround(mCurveVoice));
+        curveR.setVoice((int) std::lround(mCurveVoice));
         curveL.setWood(mCurveWood * 0.01f);
         curveR.setWood(mCurveWood * 0.01f);
         curveL.setPresence(mCurvePresence * 0.01f);
@@ -417,6 +421,7 @@ private:
     float mCurveWood = 55.0f;
     float mCurvePresence = 42.0f;
     float mCurveOn = 1.0f;
+    float mCurveVoice = 0.0f;   // Steel
 
     float mCompAmount = 48.0f;
     float mCompAttack = 32.0f;

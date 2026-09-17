@@ -20,6 +20,7 @@ public class SimplePlayEngine {
         case partThree = "3"
         case partFour = "4"
         case partFive = "5"
+        case partSix = "6"
         case microphone = "Mic"
         var id: String { rawValue }
 
@@ -28,9 +29,10 @@ public class SimplePlayEngine {
             switch self {
             case .partOne: return "acoustic-guitar-melody-calm"
             case .partTwo: return "chillin-acoustic-guitar"
-            case .partThree: return "acoustic-guitar-chords"
-            case .partFour: return "acoustic-guitar-chords-loneliness"
-            case .partFive: return "sad-acoustic-guitar-melody"
+            case .partThree: return "acoustic-guitar-chords-loneliness"
+            case .partFour: return "nylon-1"
+            case .partFive: return "nylon-2"
+            case .partSix: return "nylon-3"
             case .microphone: return nil
             }
         }
@@ -42,9 +44,10 @@ public class SimplePlayEngine {
             switch self {
             case .partOne: return "Calm melody"
             case .partTwo: return "Chillin"
-            case .partThree: return "Chords"
-            case .partFour: return "Loneliness"
-            case .partFive: return "Sad melody"
+            case .partThree: return "Loneliness"
+            case .partFour: return "Nylon 1"
+            case .partFive: return "Nylon 2"
+            case .partSix: return "Nylon 3"
             case .microphone: return "Microphone"
             }
         }

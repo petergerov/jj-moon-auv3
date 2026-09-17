@@ -284,6 +284,7 @@ public class JJMoonAudioUnit: AUAudioUnit, @unchecked Sendable {
         set(.curveAmount, preset.curveAmount)
         set(.curveWood, preset.curveWood)
         set(.curvePresence, preset.curvePresence)
+        set(.curveVoice, preset.curveVoice)
         set(.compAmount, preset.compAmount)
         set(.compAttack, preset.compAttack)
         set(.compRelease, preset.compRelease)
@@ -329,6 +330,10 @@ public class JJMoonAudioUnit: AUAudioUnit, @unchecked Sendable {
             return String(format: "%+.1f dB", value)
         case .curveOn, .compOn, .widthOn, .spaceOn:
             return value >= 0.5 ? "On" : "Off"
+        case .curveVoice:
+            let names = JJMoonCurveVoices.names
+            let index = Swift.min(Swift.max(Int(value.rounded()), 0), names.count - 1)
+            return names[index]
         default:
             return String(format: "%.2f", value)
         }

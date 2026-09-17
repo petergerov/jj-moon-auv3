@@ -14,14 +14,13 @@ UI family, different job.
 Four macro blocks in signal order, each with its own on/off, plus a master strip:
 
 ```
-In → trim → [CURVE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mix → Out
+In → trim → [SHAPE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mix → Out
 ```
 
-- **CURVE** — the reason this plug-in exists. A fixed multi-band target
-  curve aimed at well-mic'd acoustic recordings (body around 140 Hz, boxiness
-  out, soft mid dip, string presence, air on top). One Amount, plus Wood
-  (body vs sparkle) and Presence. Tuned against reference material such as
-  `sample/TheLastFallenLeaf.mp3`.
+- **SHAPE** — the reason this plug-in exists. A fixed multi-band target
+  curve aimed at well-mic'd acoustic recordings, with a **Steel / Nylon /
+  Flamenco** voice switch. One Amount (Curve knob),
+  plus Wood and Presence.
 - **COMP** — optical compressor with program-dependent release. Soft defaults
   for acoustic dynamics.
 - **WIDTH** — breeze micro-pitch + short delay stereo image, with a Focus
@@ -74,23 +73,26 @@ Open the app once so the Audio Unit registers.
 
 ## Factory presets
 
-Nine, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
-Stereo Porch, Close Mic, Moon Room, Strum, Curve Only.
+Twelve, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
+Stereo Porch, Close Mic, Moon Room, Strum, Curve Only, Nylon, Concert Hall,
+Spanish Soft, Flamenco, Rasgueado, Soleá. Nylon presets use the Nylon voice;
+Flamenco / Rasgueado / Soleá use the Flamenco voice.
 
 User presets: tap the preset window → **Save As…**; swipe left to rename or delete.
 
 ## Demo parts
 
-The container app bundles five acoustic recordings plus Mic. Picker labels
+The container app bundles six acoustic recordings plus Mic. Picker labels
 are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
 
 | Segment | File | Spoken name |
 |---|---|---|
 | **1** (default) | `loop/acoustic-guitar-melody-calm.mp3` | Calm melody |
 | **2** | `loop/chillin-acoustic-guitar.mp3` | Chillin |
-| **3** | `loop/acoustic-guitar-chords.mp3` | Chords |
-| **4** | `loop/acoustic-guitar-chords-loneliness.mp3` | Loneliness |
-| **5** | `loop/sad-acoustic-guitar-melody.mp3` | Sad melody |
+| **3** | `loop/acoustic-guitar-chords-loneliness.mp3` | Loneliness |
+| **4** | `loop/nylon-1.mp3` | Nylon 1 |
+| **5** | `loop/nylon-2.mp3` | Nylon 2 |
+| **6** | `loop/nylon-3.mp3` | Nylon 3 |
 
 Decoded on demand rather than at launch. See `SimplePlayEngine.Source`.
 

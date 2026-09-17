@@ -354,7 +354,7 @@ struct JJMoonMainView: View {
                     knob(parameterTree.curve.curveWood, "WOOD",
                          help: "Body vs sparkle. Up is warmer and fuller (more 140 Hz, darker top); down opens the air shelf.")
                     knob(parameterTree.curve.curvePresence, "PRES",
-                         help: "String detail around 3 kHz. Useful on fingerstyle; keep it low on harsh piezo.")
+                         help: "String detail. Down tames harsh piezo / mid-high bite; up lifts pick attack and sheen around 3–5 kHz. Sweep it end to end — it should be obvious.")
                 }
             }
         }

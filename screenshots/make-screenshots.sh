@@ -134,10 +134,12 @@ run_device "$IPAD"   ipad-13
 # LED lamps differ by a pixel or two between two captures of the same screen,
 # so the compare said "different" and the same picture shipped twice.
 
-echo "==> Site images"
-"$ROOT/screenshots/make-site-images.sh"
+echo "==> App Store screenshots only (site images are docs/images/jj-moon-*.jpg)"
+# Site images are curated from docs/images/jj-moon-*. Do not overwrite them
+# with cropped simulator frames unless you re-run make-site-images.sh by hand.
+# "$ROOT/screenshots/make-site-images.sh"
 
 echo
 echo "Done."
 echo "  App Store:  screenshots/store/"
-echo "  Site:       docs/images/"
+echo "  Site:       docs/images/jj-moon-*.jpg (curated — not overwritten)"

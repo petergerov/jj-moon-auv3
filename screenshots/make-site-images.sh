@@ -1,6 +1,9 @@
 #!/bin/bash
 #
-# Crops the App Store screenshots down to the marketing site's images.
+# Crops the App Store screenshots down to the marketing site's images —
+# but only when the operator asks for a full regen. The committed site
+# shots in docs/images/jj-moon-*.jpg are hand-picked; this script writes
+# the older panel-*.jpg / presets-ipad.jpg names used as fallbacks.
 #
 # Called by make-screenshots.sh; safe to run on its own once
 # screenshots/store/ is populated.
@@ -8,7 +11,7 @@
 # The site wraps its own chrome around these, so they lose the status bar and
 # the container app's transport bar and keep only the panel — the part that
 # is the same in every AUv3 host, and the part being sold. JPEG rather than
-# PNG: these are photographs of a heavily textured wooden panel, where PNG
+# PNG: these are photographs of a heavily textured panel, where PNG
 # costs four times the bytes for no visible gain.
 
 set -euo pipefail

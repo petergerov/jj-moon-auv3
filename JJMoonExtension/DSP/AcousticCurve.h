@@ -39,6 +39,7 @@ public:
         boxCut.reset();
         midDip.reset();
         presencePeak.reset();
+        presenceSheen.reset();
         airShelf.reset();
         topShelf.reset();
     }
@@ -72,6 +73,7 @@ public:
         y = boxCut.processSample(y);
         y = midDip.processSample(y);
         y = presencePeak.processSample(y);
+        y = presenceSheen.processSample(y);
         y = airShelf.processSample(y);
         y = topShelf.processSample(y);
 
@@ -98,10 +100,13 @@ private:
     {
         // Body: +1.2 dB (air side) … +4.5 dB (wood side) at ~140 Hz.
         const float bodyDb = 1.2f + wood * 3.3f;
-        // Air shelf: stronger when Wood is down.
+        // Air shelf: stronger when Wood is down — this is *air*, not string bite.
         const float airDb = 2.8f * (1.0f - wood * 0.72f);
-        // Presence peak scales with the Presence knob.
-        const float presenceDb = presence * 3.2f;
+        // Presence: must be obviously audible end-to-end. 0% gently tames the
+        // piezo / harshness band; 100% is a clear string-detail lift. Previously
+        // 0…+3.2 dB at Q≈1.1 was easy to miss once Curve Amount diluted it.
+        // Bipolar-ish: −2.5 dB → +7 dB around the string attack band.
+        const float presenceDb = -2.5f + presence * 9.5f;
         // Soft top roll-off: darker with more Wood.
         const float topHz = 14000.0f - wood * 5500.0f;
 
@@ -113,8 +118,15 @@ private:
                                                    dbToGain(-1.6f - wood * 1.2f)));
         // Mild mid dip so the body and presence have room.
         midDip.setFromArray(Biquad::makePeakFilter(sampleRate, 820.0f, 0.7f, dbToGain(-1.4f)));
-        presencePeak.setFromArray(Biquad::makePeakFilter(sampleRate, 3200.0f, 1.1f,
+        // Wider Q + slightly lower centre (~2.8 kHz) so finger noise / pick
+        // attack move as a band, not a narrow peak you can miss.
+        presencePeak.setFromArray(Biquad::makePeakFilter(sampleRate, 2800.0f, 0.75f,
                                                          dbToGain(presenceDb)));
+        // Second, narrower lift at ~5 kHz when Presence is up — string sheen
+        // that sits above Wood's air shelf so the two knobs don't feel identical.
+        const float sheenDb = std::max(0.0f, (presence - 0.35f) * 5.5f);
+        presenceSheen.setFromArray(Biquad::makePeakFilter(sampleRate, 5200.0f, 1.0f,
+                                                          dbToGain(sheenDb)));
         airShelf.setFromArray(Biquad::makeHighShelf(sampleRate, 7800.0f, 0.707f, dbToGain(airDb)));
         topShelf.setFromArray(Biquad::makeLowPass(sampleRate, topHz, 0.707f));
     }
@@ -129,6 +141,7 @@ private:
     Biquad boxCut;
     Biquad midDip;
     Biquad presencePeak;
+    Biquad presenceSheen;
     Biquad airShelf;
     Biquad topShelf;
 };

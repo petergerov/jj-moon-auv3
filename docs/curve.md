@@ -18,7 +18,7 @@ Tuned against reference material such as `sample/TheLastFallenLeaf.mp3`
 |---|---|---|
 | **Curve** | 0–100 % | Dry/wet of the whole target curve. 0 % is flat bypass. |
 | **Wood** | 0–100 % | Body vs sparkle. Up = warmer/fuller (~140 Hz shelf, darker top). Down = more air shelf. |
-| **Presence** | 0–100 % | String detail around 3 kHz. Useful on fingerstyle; keep it low on harsh piezo. |
+| **Presence** | 0–100 % | String detail. 0 % gently cuts the harsh 2.8 kHz band (−2.5 dB); 100 % is a clear lift (+7 dB) plus a 5 kHz sheen. Keep it low on harsh piezo. |
 | **On/Off** | | Bypass for Curve only. DSP keeps running, so switching back is click-free. |
 
 ## What moves under the hood
@@ -29,7 +29,8 @@ At full Amount with middle Wood / Presence settings, roughly:
 - Low shelf ~140 Hz (Wood scales the boost)
 - Peak cut ~360 Hz (boxiness; deeper with more Wood)
 - Mild mid dip ~820 Hz
-- Presence peak ~3.2 kHz (Presence scales the boost)
+- Presence peak ~2.8 kHz (−2.5 dB at 0 % … +7 dB at 100 %), wider Q
+- Sheen peak ~5.2 kHz (engages above ~35 % Presence)
 - High shelf ~7.8 kHz (stronger when Wood is down)
 - Soft low-pass that darkens as Wood goes up
 - Gentle tanh saturation keyed off Wood

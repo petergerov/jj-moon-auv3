@@ -11,7 +11,7 @@ enum JJMoonCurveVoices {
 }
 
 let JJMoonParameterSpecs = ParameterTreeSpec {
-    ParameterGroupSpec(identifier: "curve", name: "Curve") {
+    ParameterGroupSpec(identifier: "curve", name: "Shape") {
         // One Amount for the whole target curve — the point of the plug-in.
         // Wood and Presence are character; Voice picks the target shape.
         ParameterSpec(address: .curveAmount, identifier: "curveAmount", name: "Curve",

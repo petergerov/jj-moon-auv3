@@ -1,6 +1,7 @@
-# Curve
+# Shape (Curve)
 
-The reason jj-moon exists — and the first block in the chain.
+The reason jj-moon exists — and the first block in the chain. On the panel
+the section is labelled **SHAPE**; the Amount knob is still **CURVE**.
 
 A fixed multi-band target shape aimed at well-mic'd acoustic guitar
 recordings. Three voices share the same knobs but different targets:
@@ -18,11 +19,11 @@ for Steel (strong 80–250 Hz body, smooth downhill through the mids).
 
 | Control | Range | What it does |
 |---|---|---|
-| **STEEL / NYLON / FLAME** | tabs | Selects the target curve. |
-| **Curve** | 0–100 % | Dry/wet of the whole target curve. 0 % is flat bypass. |
+| **STEEL / NYLON / FLAME** | tabs | Selects the acoustic target voice. |
+| **Curve** | 0–100 % | Dry/wet of the whole target shape. 0 % is flat bypass. |
 | **Wood** | 0–100 % | Body vs sparkle. Centre frequency follows the voice. |
 | **Presence** | 0–100 % | String detail. 0 % gently cuts harshness; 100 % lifts attack/sheen. Keep it low on harsh piezo. |
-| **On/Off** | | Bypass for Curve only. |
+| **On/Off** | | Bypass for Shape only. |
 
 ## Steel under the hood
 

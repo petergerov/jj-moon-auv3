@@ -121,6 +121,41 @@ screw(at: CGPoint(x: size - screwInset, y: size - screwInset), radius: screwRadi
 screw(at: CGPoint(x: screwInset, y: screwInset), radius: screwRadius, slotAngle: -0.35)
 screw(at: CGPoint(x: size - screwInset, y: screwInset), radius: screwRadius, slotAngle: 0.85)
 
+// MARK: - Soundhole / rosette
+// One readable acoustic cue at home-screen sizes (~40 pt). Concentric rings
+// around a dark hole — reads as a guitar soundhole without fighting the
+// meter arc or the wordmark. Drawn before the arc so the meter stays on top.
+let holeCenter = CGPoint(x: size / 2, y: size - 620)
+let holeRadius: CGFloat = 118
+
+func strokeRing(radius: CGFloat, width: CGFloat, color: CGColor) {
+    ctx.setStrokeColor(color)
+    ctx.setLineWidth(width)
+    ctx.strokeEllipse(in: CGRect(x: holeCenter.x - radius, y: holeCenter.y - radius,
+                                 width: radius * 2, height: radius * 2))
+}
+
+// Soft shadow under the hole so it sits into the panel paint.
+ctx.setFillColor(rgb(0x000000, 0.28))
+ctx.fillEllipse(in: CGRect(x: holeCenter.x - holeRadius - 6, y: holeCenter.y - holeRadius - 4,
+                           width: (holeRadius + 6) * 2, height: (holeRadius + 8) * 2))
+
+// Rosette rings — outer to inner, pale then brass.
+strokeRing(radius: holeRadius + 22, width: 5, color: rgb(0xf0f3f8, 0.35))
+strokeRing(radius: holeRadius + 14, width: 7, color: brassDim)
+strokeRing(radius: holeRadius + 6, width: 5, color: brass)
+strokeRing(radius: holeRadius + 1, width: 3, color: rgb(0xf0f3f8, 0.55))
+
+// The hole itself.
+ctx.setFillColor(rgb(0x0a0c10, 0.92))
+ctx.fillEllipse(in: CGRect(x: holeCenter.x - holeRadius, y: holeCenter.y - holeRadius,
+                           width: holeRadius * 2, height: holeRadius * 2))
+// Tiny specular at the rim so it reads as recessed wood, not a flat disc.
+ctx.setStrokeColor(rgb(0xffffff, 0.12))
+ctx.setLineWidth(3)
+ctx.strokeEllipse(in: CGRect(x: holeCenter.x - holeRadius + 4, y: holeCenter.y - holeRadius + 4,
+                             width: (holeRadius - 4) * 2, height: (holeRadius - 4) * 2))
+
 // MARK: - Meter arc
 // Geometry lifted from the jj-breeze icon so the two sit side by side in a
 // home screen folder without one looking redrawn.

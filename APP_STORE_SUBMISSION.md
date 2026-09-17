@@ -103,11 +103,11 @@ a rack of EQ.
 jj-moon is an acoustic-guitar curve engine in a single AUv3 insert. Four
 blocks in signal order, each with its own on/off, plus a master strip.
 
-CURVE — A fixed multi-band target aimed at great acoustic recordings: rumble
+SHAPE — A fixed multi-band target aimed at great acoustic recordings: rumble
 out, body in, boxiness out, soft mid dip, string presence, air on top. Three
-voices — Steel, Nylon, Flamenco — share the same knobs. One Amount for how
-far you go, Wood for body vs sparkle, Presence for the strings. This is the
-block the whole plug-in is built around.
+voices — Steel, Nylon, Flamenco — share the same knobs. One Curve amount for
+how far you go, Wood for body vs sparkle, Presence for the strings. This is
+the block the whole plug-in is built around.
 
 COMP — An optical compressor with program-dependent release. Soft by design
 for acoustic dynamics. One Comp knob for threshold, ratio and make-up
@@ -228,9 +228,15 @@ composited backgrounds, no marketing text over the top.
 
 Upload order — first shot is the search-results thumbnail:
 
-1. `01-panel` — the panel as it opens (Curve / Comp / Width / Space).
+1. `01-panel` — the panel as it opens (Shape with Steel/Nylon/Flame, Comp,
+   Width, Space). Suggested ASC caption: **Acoustic guitar · one insert**.
 2. `02-width-space` — Width and Space (iPhone only; iPad already fits).
+   Caption: **Width and room around the body**.
 3. `03-presets` — the preset window open over the panel.
+   Caption: **Steel, nylon, flamenco factory starts**.
+
+Do not bake marketing text into the PNGs — App Review rejects UI the app
+does not show. Captions live in App Store Connect.
 
 **There is deliberately no paywall screenshot** — currency differs by
 storefront.
@@ -299,10 +305,10 @@ downloaded contains the plug-in and also works as a standalone player, so
 the effect can be reviewed without installing a DAW:
 
 1. Open the app. It opens on demo part 1 (Calm melody) — tap Play.
-2. Turn any knob on the panel. Curve, Comp, Width and Space each have an
+2. Turn any knob on the panel. Shape, Comp, Width and Space each have an
    on/off switch so their contribution can be heard individually.
 3. Tap the preset window at the top to load any of the 15 factory presets.
-   Try Steel / Nylon / FLAME on the Curve section, or load Flamenco / Rasgueado.
+   Try Steel / Nylon / FLAME on the Shape section, or load Flamenco / Rasgueado.
 4. Use the segmented control (1–6 / Mic) to switch demo parts.
 
 To review it as a plug-in inside another app (optional):

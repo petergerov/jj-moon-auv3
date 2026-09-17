@@ -124,10 +124,9 @@ struct JJMoonMainView: View {
 
     // MARK: - Header
 
-    // One row: wordmark, preset selector, IN/OUT meters, power switch. The
-    // preset selector is the only flexible item, so it takes whatever width
-    // the wordmark, meters and switch leave; the strapline that used to sit
-    // under the wordmark moved to versionFooter so this stays a single line.
+    // One row: wordmark (+ strapline), preset selector, IN/OUT meters, power
+    // switch. The preset selector is the only flexible item, so it takes
+    // whatever width the brand stack, meters and switch leave.
     private var header: some View {
         VStack(spacing: 8) {
             HStack(alignment: .center, spacing: 8) {
@@ -140,17 +139,30 @@ struct JJMoonMainView: View {
                     .padding(.trailing, 5)
                     .layoutPriority(1)
 
-                Text("j.j.moon")
-                    .font(.custom("Georgia-BoldItalic", size: 18))
-                    .foregroundStyle(GearTheme.textLight)
-                    .shadow(color: .black.opacity(0.75), radius: 0, x: 0, y: 1.5)
-                    .shadow(color: .black.opacity(0.35), radius: 3, x: 0, y: 2)
-                    .lineLimit(1)
-                    // Keeps its full size while there is room and only
-                    // compresses on a narrow phone, so the preset window
-                    // beside it never has to truncate first.
-                    .minimumScaleFactor(0.6)
-                    .layoutPriority(1)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("j.j.moon")
+                        .font(.custom("Georgia-BoldItalic", size: 18))
+                        .foregroundStyle(GearTheme.textLight)
+                        .shadow(color: .black.opacity(0.75), radius: 0, x: 0, y: 1.5)
+                        .shadow(color: .black.opacity(0.35), radius: 3, x: 0, y: 2)
+                        .lineLimit(1)
+                        // Keeps its full size while there is room and only
+                        // compresses on a narrow phone, so the preset window
+                        // beside it never has to truncate first.
+                        .minimumScaleFactor(0.6)
+
+                    Text("MIC'D ACOUSTIC SHAPE")
+                        .font(.system(size: 8, weight: .heavy))
+                        .tracking(1.1)
+                        .foregroundStyle(GearTheme.textMuted)
+                        .shadow(color: .black.opacity(0.55), radius: 0, x: 0, y: 1)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .accessibilityHidden(true)
+                }
+                .layoutPriority(1)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("j.j.moon, mic'd acoustic shape")
 
                 PresetBar(audioUnit: audioUnit)
                     .frame(minWidth: 96, maxWidth: 340)
@@ -342,8 +354,10 @@ struct JJMoonMainView: View {
     // @dynamicMemberLookup here only resolves reliably one hop at a time
     // (see ObservableAUParameter.swift).
 
-    /// Indexed voice selector — Steel / Nylon / Flamenco — same lamp-and-silkscreen
-    /// idiom as `modeTab`, but sets an absolute index rather than toggling.
+    /// Indexed voice selector — Steel / Nylon / Flamenco. Guitar-native labels
+    /// are the clearest in-panel cue that this block is an acoustic target.
+    /// Same lamp-and-silkscreen idiom as `modeTab`, but sets an absolute index
+    /// rather than toggling.
     private func voiceTab(_ title: String, index: Int, param: ObservableAUParameter) -> some View {
         let selected = Int(param.value.rounded()) == index
         return Button {
@@ -375,7 +389,7 @@ struct JJMoonMainView: View {
         let curveOn: ObservableAUParameter = parameterTree.curve.curveOn
         let curveVoice: ObservableAUParameter = parameterTree.curve.curveVoice
         return VStack(alignment: .leading, spacing: 10) {
-            sectionHeader("CURVE", enabled: curveOn) {
+            sectionHeader("SHAPE", enabled: curveOn) {
                 HStack(spacing: 4) {
                     voiceTab("STEEL", index: JJMoonCurveVoices.steel, param: curveVoice)
                     voiceTab("NYLON", index: JJMoonCurveVoices.nylon, param: curveVoice)
@@ -386,7 +400,7 @@ struct JJMoonMainView: View {
             sectionBody(enabled: curveOn) {
                 HStack(spacing: knobRowSpacing) {
                     knob(parameterTree.curve.curveAmount, "CURVE",
-                         help: "How far toward the ideal recording curve for the selected voice (Steel, Nylon, or Flamenco).")
+                         help: "How far toward the mic'd acoustic target for the selected voice (Steel, Nylon, or Flamenco).")
                     knob(parameterTree.curve.curveWood, "WOOD",
                          help: "Body vs sparkle. Steel ~140 Hz, Nylon warmer ~200 Hz chest, Flamenco tighter ~160 Hz with less boom.")
                     knob(parameterTree.curve.curvePresence, "PRES",

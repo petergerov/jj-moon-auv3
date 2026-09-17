@@ -14,12 +14,12 @@ UI family, different job.
 Four macro blocks in signal order, each with its own on/off, plus a master strip:
 
 ```
-In → trim → [CURVE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mix → Out
+In → trim → [SHAPE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mix → Out
 ```
 
-- **CURVE** — the reason this plug-in exists. A fixed multi-band target
+- **SHAPE** — the reason this plug-in exists. A fixed multi-band target
   curve aimed at well-mic'd acoustic recordings, with a **Steel / Nylon /
-  Flamenco** voice switch. One Amount,
+  Flamenco** voice switch. One Amount (Curve knob),
   plus Wood and Presence.
 - **COMP** — optical compressor with program-dependent release. Soft defaults
   for acoustic dynamics.

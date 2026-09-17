@@ -1,0 +1,41 @@
+{
+  "identifier" : "B7C1A93E",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : true,
+      "internalID" : "6670000101",
+      "localizations" : [
+        {
+          "description" : "Permanent unlock for jj-moon on all your devices. Seven days free from first launch.",
+          "displayName" : "jj-moon Unlock",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.gerov.jjmoon.unlock",
+      "referenceName" : "jj-moon Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      }
+    ],
+    "_storeKitErrorsEnabled" : false
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

@@ -33,7 +33,7 @@ struct FactoryPreset: Sendable {
 
 /// Destinations for the acoustic curve engine. Names describe a feel or a
 /// place — never an artist, and never a claim to reproduce a particular
-/// recording. `curveVoice` is 0 = Steel, 1 = Nylon.
+/// recording. `curveVoice` is 0 = Steel, 1 = Nylon, 2 = Flamenco.
 enum FactoryPresets {
     static let all: [FactoryPreset] = [
         FactoryPreset(number: 0, name: "Default",
@@ -130,6 +130,31 @@ enum FactoryPresets {
                       compAmount: 50, compAttack: 34, compRelease: 180,
                       widthAmount: 22, widthFocus: 280,
                       spaceDouble: 8, spaceSize: 36, spaceMix: 14,
+                      masterMix: 100, masterOutput: 0,
+                      curveOn: true, compOn: true, widthOn: true, spaceOn: true),
+
+        // Flamenco voice — tight body, mid-bite, nail sheen.
+        FactoryPreset(number: 12, name: "Flamenco",
+                      curveAmount: 74, curveWood: 42, curvePresence: 62, curveVoice: 2,
+                      compAmount: 52, compAttack: 22, compRelease: 130,
+                      widthAmount: 32, widthFocus: 220,
+                      spaceDouble: 10, spaceSize: 28, spaceMix: 10,
+                      masterMix: 100, masterOutput: 0,
+                      curveOn: true, compOn: true, widthOn: true, spaceOn: true),
+
+        FactoryPreset(number: 13, name: "Rasgueado",
+                      curveAmount: 80, curveWood: 35, curvePresence: 72, curveVoice: 2,
+                      compAmount: 58, compAttack: 16, compRelease: 110,
+                      widthAmount: 38, widthFocus: 200,
+                      spaceDouble: 8, spaceSize: 22, spaceMix: 8,
+                      masterMix: 100, masterOutput: 0,
+                      curveOn: true, compOn: true, widthOn: true, spaceOn: true),
+
+        FactoryPreset(number: 14, name: "Soleá",
+                      curveAmount: 70, curveWood: 55, curvePresence: 48, curveVoice: 2,
+                      compAmount: 44, compAttack: 30, compRelease: 170,
+                      widthAmount: 30, widthFocus: 240,
+                      spaceDouble: 16, spaceSize: 50, spaceMix: 22,
                       masterMix: 100, masterOutput: 0,
                       curveOn: true, compOn: true, widthOn: true, spaceOn: true),
     ]

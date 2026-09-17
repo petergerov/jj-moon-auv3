@@ -104,9 +104,10 @@ jj-moon is an acoustic-guitar curve engine in a single AUv3 insert. Four
 blocks in signal order, each with its own on/off, plus a master strip.
 
 CURVE — A fixed multi-band target aimed at great acoustic recordings: rumble
-out, body in, boxiness out, soft mid dip, string presence, air on top. One
-Amount for how far you go, Wood for body vs sparkle, Presence for the
-strings. This is the block the whole plug-in is built around.
+out, body in, boxiness out, soft mid dip, string presence, air on top. Three
+voices — Steel, Nylon, Flamenco — share the same knobs. One Amount for how
+far you go, Wood for body vs sparkle, Presence for the strings. This is the
+block the whole plug-in is built around.
 
 COMP — An optical compressor with program-dependent release. Soft by design
 for acoustic dynamics. One Comp knob for threshold, ratio and make-up
@@ -120,16 +121,17 @@ while the highs open up.
 SPACE — A short stereo double with gentle flutter, into a soft acoustic
 room bloom. Not a spring tank — just a little air around the instrument.
 
-NINE FACTORY PRESETS
+FIFTEEN FACTORY PRESETS
 Default, Fallen Leaf, Fingerstyle, Piezo Soft, Stereo Porch, Close Mic,
-Moon Room, Strum, Curve Only. Save your own from the preset window; swipe
-left to rename or delete.
+Moon Room, Strum, Curve Only, Nylon, Concert Hall, Spanish Soft, Flamenco,
+Rasgueado, Soleá. Save your own from the preset window; swipe left to
+rename or delete.
 
 WORKS WHERE YOU WORK
 An Audio Unit v3 effect: GarageBand, Logic for iPad, AUM, Cubasis,
 BeatMaker, and any other AUv3 host. The included app is a working player —
-five acoustic demo parts are bundled, or run your own playing through the
-microphone.
+six acoustic demo parts are bundled (steel + nylon), or run your own
+playing through the microphone.
 
 The panel is drawn procedurally rather than assembled from bitmaps, so it
 stays sharp at whatever size your host gives it, on a phone or a 13-inch
@@ -179,7 +181,7 @@ The repository is `petergerov/jj-moon-auv3`, so the Pages site is served
 from `/jj-moon-auv3` — the `-auv3` suffix is part of the URL, exactly as
 for `jj-breeze-auv3` and `jj-midnight-auv3`. Dropping it gives a 404.
 
-`docs/privacy.html` must keep describing the shipped app (five demo parts,
+`docs/privacy.html` must keep describing the shipped app (six demo parts,
 optional mic, no analytics).
 
 ---
@@ -257,7 +259,7 @@ no crash reporter that phones home. Install date and unlock state live in
 Purchases go through StoreKit (Apple's transaction).
 
 **Microphone:** optional in the companion app for live input. Usage string is
-in `JJMoon/Info.plist`. Audio is processed on-device, never uploaded. Five
+in `JJMoon/Info.plist`. Audio is processed on-device, never uploaded. Six
 bundled acoustic parts work without mic permission.
 
 ---
@@ -275,7 +277,7 @@ xcodebuild -project JJMoon.xcodeproj -scheme jj-moon \
 first Organizer upload (`-allowProvisioningUpdates`), or create them in the
 developer portal by hand.
 
-Confirm the archive embeds the five `loop/*.mp3` demos and the appex
+Confirm the archive embeds the six `loop/*.mp3` demos and the appex
 `AudioComponents` entry with subtype `Jjmo`.
 
 ---
@@ -299,8 +301,9 @@ the effect can be reviewed without installing a DAW:
 1. Open the app. It opens on demo part 1 (Calm melody) — tap Play.
 2. Turn any knob on the panel. Curve, Comp, Width and Space each have an
    on/off switch so their contribution can be heard individually.
-3. Tap the preset window at the top to load any of the 9 factory presets.
-4. Use the segmented control (1–5 / Mic) to switch demo parts.
+3. Tap the preset window at the top to load any of the 15 factory presets.
+   Try Steel / Nylon / FLAME on the Curve section, or load Flamenco / Rasgueado.
+4. Use the segmented control (1–6 / Mic) to switch demo parts.
 
 To review it as a plug-in inside another app (optional):
 
@@ -321,7 +324,7 @@ whichever one the user opens first.
 
 MICROPHONE
 The microphone is optional and used only to feed live audio through the
-effect in the standalone player. Five acoustic recordings are bundled so
+effect in the standalone player. Six acoustic recordings are bundled so
 the app can be reviewed without granting it.
 ```
 

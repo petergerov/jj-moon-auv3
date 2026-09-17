@@ -18,8 +18,8 @@ In → trim → [CURVE] → [COMP] → [WIDTH] → [SPACE: double + room] → Mi
 ```
 
 - **CURVE** — the reason this plug-in exists. A fixed multi-band target
-  curve aimed at well-mic'd acoustic recordings, with a **Steel / Nylon**
-  voice switch (western steel-string vs concert / Spanish nylon). One Amount,
+  curve aimed at well-mic'd acoustic recordings, with a **Steel / Nylon /
+  Flamenco** voice switch. One Amount,
   plus Wood and Presence.
 - **COMP** — optical compressor with program-dependent release. Soft defaults
   for acoustic dynamics.
@@ -75,22 +75,24 @@ Open the app once so the Audio Unit registers.
 
 Twelve, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
 Stereo Porch, Close Mic, Moon Room, Strum, Curve Only, Nylon, Concert Hall,
-Spanish Soft. The last three use the Nylon voice.
+Spanish Soft, Flamenco, Rasgueado, Soleá. Nylon presets use the Nylon voice;
+Flamenco / Rasgueado / Soleá use the Flamenco voice.
 
 User presets: tap the preset window → **Save As…**; swipe left to rename or delete.
 
 ## Demo parts
 
-The container app bundles five acoustic recordings plus Mic. Picker labels
+The container app bundles six acoustic recordings plus Mic. Picker labels
 are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
 
 | Segment | File | Spoken name |
 |---|---|---|
 | **1** (default) | `loop/acoustic-guitar-melody-calm.mp3` | Calm melody |
 | **2** | `loop/chillin-acoustic-guitar.mp3` | Chillin |
-| **3** | `loop/acoustic-guitar-chords.mp3` | Chords |
-| **4** | `loop/acoustic-guitar-chords-loneliness.mp3` | Loneliness |
-| **5** | `loop/sad-acoustic-guitar-melody.mp3` | Sad melody |
+| **3** | `loop/acoustic-guitar-chords-loneliness.mp3` | Loneliness |
+| **4** | `loop/nylon-1.mp3` | Nylon 1 |
+| **5** | `loop/nylon-2.mp3` | Nylon 2 |
+| **6** | `loop/nylon-3.mp3` | Nylon 3 |
 
 Decoded on demand rather than at launch. See `SimplePlayEngine.Source`.
 

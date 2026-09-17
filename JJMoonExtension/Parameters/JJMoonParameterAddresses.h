@@ -36,6 +36,6 @@ typedef NS_ENUM(AUParameterAddress, JJMoonParameterAddress) {
     masterInput,
 
     // Curve voice — appended so existing addresses keep their numbers.
-    // 0 = Steel (western / steel-string), 1 = Nylon (concert / classical).
+    // 0 = Steel, 1 = Nylon (concert), 2 = Flamenco.
     curveVoice
 };

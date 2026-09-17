@@ -342,7 +342,7 @@ struct JJMoonMainView: View {
     // @dynamicMemberLookup here only resolves reliably one hop at a time
     // (see ObservableAUParameter.swift).
 
-    /// Indexed voice selector — Steel / Nylon — same lamp-and-silkscreen
+    /// Indexed voice selector — Steel / Nylon / Flamenco — same lamp-and-silkscreen
     /// idiom as `modeTab`, but sets an absolute index rather than toggling.
     private func voiceTab(_ title: String, index: Int, param: ObservableAUParameter) -> some View {
         let selected = Int(param.value.rounded()) == index
@@ -379,17 +379,18 @@ struct JJMoonMainView: View {
                 HStack(spacing: 4) {
                     voiceTab("STEEL", index: JJMoonCurveVoices.steel, param: curveVoice)
                     voiceTab("NYLON", index: JJMoonCurveVoices.nylon, param: curveVoice)
+                    voiceTab("FLAME", index: JJMoonCurveVoices.flamenco, param: curveVoice)
                 }
             }
 
             sectionBody(enabled: curveOn) {
                 HStack(spacing: knobRowSpacing) {
                     knob(parameterTree.curve.curveAmount, "CURVE",
-                         help: "How far toward the ideal recording curve for the selected voice (Steel or Nylon). Body, air and presence move together.")
+                         help: "How far toward the ideal recording curve for the selected voice (Steel, Nylon, or Flamenco).")
                     knob(parameterTree.curve.curveWood, "WOOD",
-                         help: "Body vs sparkle. On Steel, up adds ~140 Hz; on Nylon, a warmer ~200 Hz chest. Down opens the air shelf.")
+                         help: "Body vs sparkle. Steel ~140 Hz, Nylon warmer ~200 Hz chest, Flamenco tighter ~160 Hz with less boom.")
                     knob(parameterTree.curve.curvePresence, "PRES",
-                         help: "String detail. Steel centres around 2.8–5 kHz (pick attack); Nylon around 2.2–3.8 kHz (softer finger tone). Down tames harshness.")
+                         help: "String / nail detail. Steel ~2.8–5 kHz, Nylon ~2.2–3.8 kHz, Flamenco mid-bite ~1.9–4.5 kHz for rasgueado.")
                 }
             }
         }

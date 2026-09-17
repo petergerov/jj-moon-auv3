@@ -21,7 +21,6 @@
 		3BD3D6BB6003FE0B4BA35ED0 /* acoustic-guitar-chords-loneliness.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9503B842DA6201063B4F5DDD /* acoustic-guitar-chords-loneliness.mp3 */; };
 		41DD44FE6904EAE0F3081FB3 /* ParameterSpecBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF0EC30F0DBDEB020162D /* ParameterSpecBase.swift */; };
 		47D3B26043CEC81A55015C9C /* ViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1CFE3A2EACC710F527573 /* ViewControllerRepresentable.swift */; };
-		4BD494E8802EB322319A782A /* acoustic-guitar-chords.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0CC90425C49E0BF015FB68EF /* acoustic-guitar-chords.mp3 */; };
 		4F711A92914A6F3EF8347FDA /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FC4B73CD9FA3636A8E200C /* ScreenshotTests.swift */; };
 		4F7FCC62EE86B1F6549A3B94 /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9EA0E32A0FC7EE1D964AB /* StringHelpers.swift */; };
 		50E82C33F69AC4A48667CBD6 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8CCD29E641E7F9676B170 /* Presets.swift */; };
@@ -29,12 +28,12 @@
 		5FEB769B6AF43D3909B504E6 /* Skew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC23E50CD2B11FA83684B39 /* Skew.swift */; };
 		634D2F2423292D714352EC5E /* LevelMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB53881E177133C97748B9 /* LevelMeterView.swift */; };
 		63A8277142270253DE8A8755 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B4EEDAA6B25C68F4D76D3A /* Parameters.swift */; };
-		64D8EDD0A3C16E6A18F92006 /* sad-acoustic-guitar-melody.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 14C6D1D8B049044C42040418 /* sad-acoustic-guitar-melody.mp3 */; };
 		65BCEE5447C847654C41C6CA /* AudioUnitHostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21A0F5445007DDE5CFE9EC /* AudioUnitHostModel.swift */; };
 		65E42E70B7AFFD4B4C5104BC /* KnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A969A466E25B9C4C8BE797 /* KnobView.swift */; };
 		7CFEC9C01B179A8338521B68 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8CCD29E641E7F9676B170 /* Presets.swift */; };
 		7DE6C6F061FD26C64566603F /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98081657304936F43690C94E /* PaywallView.swift */; };
 		7EA50F0A06ABF435B3A6C41D /* PresetBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FC6056468CC6532C330090 /* PresetBar.swift */; };
+		81B0C078B439B770620B85EA /* nylon-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3272C507F7E5B8C3BC38E48A /* nylon-2.mp3 */; };
 		8A0B193DC6EAD092CC8B5384 /* EntitlementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62C8A0524C48F82EC6E63C /* EntitlementService.swift */; };
 		8FEC99F028D30514FA1B0509 /* UnlockStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */; };
 		91A21B83A1F16DA5139B33D3 /* GearTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C04D9038A0294D899ED52BB /* GearTheme.swift */; };
@@ -51,7 +50,9 @@
 		C4A41B911229A023F3A52E4C /* JJMoonMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B245AD96B2808B325BA1527 /* JJMoonMainView.swift */; };
 		D466C0DF3ED11F403D84DE8B /* chillin-acoustic-guitar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C42F42D68524DEFBCE754 /* chillin-acoustic-guitar.mp3 */; };
 		D490C18F6E63172F4AFF5859 /* Meters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95382D7FEA7434636657E7A7 /* Meters.swift */; };
+		D52AEBCB4EE8D9B5CEFE022E /* nylon-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6AF7C0AF95BC6BA4EF2D09D /* nylon-3.mp3 */; };
 		D6A736F0FFCCE901A6D2248F /* JJMoonAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */; };
+		D964BAA5797D266C54DAFBE2 /* nylon-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC77BFE9E7B588491E06F06C /* nylon-1.mp3 */; };
 		D96A8103DE3FE17CB6FD4785 /* RackPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582CE55C8687336BCC7AC5F /* RackPanel.swift */; };
 		DA1A56F6CB41A6EE16F487A6 /* UserPresetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63868DD7C6929D4F717C8BC6 /* UserPresetStore.swift */; };
 		DDDF2131B8CC5EE14740C862 /* CrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E6F998C7AF2036B2D429 /* CrossPlatform.swift */; };
@@ -106,11 +107,9 @@
 		01B90731FDCEC126D2BE11CB /* RoomBloom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBloom.h; sourceTree = "<group>"; };
 		02A9EA0E32A0FC7EE1D964AB /* StringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
 		0C12152735469A90296E00E9 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
-		0CC90425C49E0BF015FB68EF /* acoustic-guitar-chords.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "acoustic-guitar-chords.mp3"; sourceTree = "<group>"; };
 		0D12365DD19B0590D391CAD9 /* AcousticCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcousticCurve.h; sourceTree = "<group>"; };
 		0E5CE2E5719E1CC487E39BBA /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		10FC4B73CD9FA3636A8E200C /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
-		14C6D1D8B049044C42040418 /* sad-acoustic-guitar-melody.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sad-acoustic-guitar-melody.mp3"; sourceTree = "<group>"; };
 		22DFF0EC30F0DBDEB020162D /* ParameterSpecBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterSpecBase.swift; sourceTree = "<group>"; };
 		24A969A466E25B9C4C8BE797 /* KnobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnobView.swift; sourceTree = "<group>"; };
 		27657DEC89B5982CA46F4F66 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
@@ -118,6 +117,7 @@
 		295B31CA2D0C6E08572BE14D /* acoustic-guitar-melody-calm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "acoustic-guitar-melody-calm.mp3"; sourceTree = "<group>"; };
 		2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJMoonAudioUnit.swift; sourceTree = "<group>"; };
 		3241E912A7D51EA396B13131 /* JJMoonScreenshots.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = JJMoonScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3272C507F7E5B8C3BC38E48A /* nylon-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "nylon-2.mp3"; sourceTree = "<group>"; };
 		3C04D9038A0294D899ED52BB /* GearTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTheme.swift; sourceTree = "<group>"; };
 		3DF8CCD29E641E7F9676B170 /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
 		3E3C42F42D68524DEFBCE754 /* chillin-acoustic-guitar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "chillin-acoustic-guitar.mp3"; sourceTree = "<group>"; };
@@ -143,8 +143,10 @@
 		9CEF8524555693F315D244C0 /* JJMoonExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JJMoonExtension.entitlements; sourceTree = "<group>"; };
 		A0AB231EC522F26E8762B2F4 /* LedToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedToggle.swift; sourceTree = "<group>"; };
 		A80F5F7D6EB3FD1551DF6668 /* JJMoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JJMoon.entitlements; sourceTree = "<group>"; };
+		AC77BFE9E7B588491E06F06C /* nylon-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "nylon-1.mp3"; sourceTree = "<group>"; };
 		AD522E8BE027C76A34004459 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B1CFAFBB4593C72DDB50B0A0 /* CompressorStage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompressorStage.h; sourceTree = "<group>"; };
+		B6AF7C0AF95BC6BA4EF2D09D /* nylon-3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "nylon-3.mp3"; sourceTree = "<group>"; };
 		BBC23E50CD2B11FA83684B39 /* Skew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skew.swift; sourceTree = "<group>"; };
 		BCA8A1615ABF402D81FEC32C /* JJMoonBufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JJMoonBufferedAudioBus.hpp; sourceTree = "<group>"; };
 		C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockStore.swift; sourceTree = "<group>"; };
@@ -204,10 +206,11 @@
 			isa = PBXGroup;
 			children = (
 				9503B842DA6201063B4F5DDD /* acoustic-guitar-chords-loneliness.mp3 */,
-				0CC90425C49E0BF015FB68EF /* acoustic-guitar-chords.mp3 */,
 				295B31CA2D0C6E08572BE14D /* acoustic-guitar-melody-calm.mp3 */,
 				3E3C42F42D68524DEFBCE754 /* chillin-acoustic-guitar.mp3 */,
-				14C6D1D8B049044C42040418 /* sad-acoustic-guitar-melody.mp3 */,
+				AC77BFE9E7B588491E06F06C /* nylon-1.mp3 */,
+				3272C507F7E5B8C3BC38E48A /* nylon-2.mp3 */,
+				B6AF7C0AF95BC6BA4EF2D09D /* nylon-3.mp3 */,
 			);
 			path = loop;
 			sourceTree = "<group>";
@@ -466,10 +469,11 @@
 			files = (
 				E968F45A0D4FA61352502130 /* Assets.xcassets in Resources */,
 				3BD3D6BB6003FE0B4BA35ED0 /* acoustic-guitar-chords-loneliness.mp3 in Resources */,
-				4BD494E8802EB322319A782A /* acoustic-guitar-chords.mp3 in Resources */,
 				E35916F77915EC7A2411F9CB /* acoustic-guitar-melody-calm.mp3 in Resources */,
 				D466C0DF3ED11F403D84DE8B /* chillin-acoustic-guitar.mp3 in Resources */,
-				64D8EDD0A3C16E6A18F92006 /* sad-acoustic-guitar-melody.mp3 in Resources */,
+				D964BAA5797D266C54DAFBE2 /* nylon-1.mp3 in Resources */,
+				81B0C078B439B770620B85EA /* nylon-2.mp3 in Resources */,
+				D52AEBCB4EE8D9B5CEFE022E /* nylon-3.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

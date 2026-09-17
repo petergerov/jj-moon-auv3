@@ -7,21 +7,21 @@
     The core of jj-moon: a fixed multi-band target curve that aims at the
     spectral shape of a well-mic'd acoustic guitar recording.
 
-    Two voices:
-      Steel (0) — western / steel-string. Reference: sample/TheLastFallenLeaf.mp3
-                  (strong 80–250 Hz body, smooth mid downhill, restrained air).
-      Nylon (1) — concert / classical / Spanish with nylon strings. Warmer mid
-                  body, softer attack, earlier top, less 5 kHz sheen.
+    Three voices:
+      Steel (0)    — western / steel-string. Reference: TheLastFallenLeaf.mp3
+      Nylon (1)    — concert / classical. Warm mid-body, soft attack, early top.
+      Flamenco (2) — nylon too, but tight body, mid-bite for rasgueado / golpe,
+                     brighter attack than concert, less romantic chest.
 
-    Three macros (shared by both voices):
+    Three macros (shared by all voices):
       Amount  — dry/wet of the whole curve (0 = flat bypass)
       Wood    — body vs air balance
-      Presence — string detail (centres differ per voice)
+      Presence — string / nail detail (centres differ per voice)
 */
 class AcousticCurve
 {
 public:
-    enum Voice : int { Steel = 0, Nylon = 1 };
+    enum Voice : int { Steel = 0, Nylon = 1, Flamenco = 2 };
 
     void prepare(double newSampleRate)
     {
@@ -46,7 +46,7 @@ public:
 
     void setVoice(int v)
     {
-        const int nv = (v >= Nylon) ? Nylon : Steel;
+        const int nv = std::clamp(v, (int) Steel, (int) Flamenco);
         if (nv == voice)
             return;
         voice = nv;
@@ -85,9 +85,13 @@ public:
         y = airShelf.processSample(y);
         y = topShelf.processSample(y);
 
-        // Soft wood saturation — nylon gets a slightly softer drive so the
-        // result stays round rather than steel-string crunchy.
-        const float driveScale = (voice == Nylon) ? 0.72f : 1.0f;
+        // Saturation character follows the voice: nylon soft, flamenco a
+        // touch more edge for nail attack, steel in between-ish on the high end.
+        float driveScale = 1.0f;
+        if (voice == Nylon)
+            driveScale = 0.72f;
+        else if (voice == Flamenco)
+            driveScale = 0.88f;
         const float drive = (0.35f + wood * 0.55f) * driveScale;
         const float k = 1.0f + drive * 2.8f;
         y = std::tanh(y * k) / std::tanh(k);
@@ -104,15 +108,16 @@ private:
 
     void updateCoefficients()
     {
-        if (voice == Nylon)
-            updateNylon();
-        else
-            updateSteel();
+        switch (voice)
+        {
+            case Flamenco: updateFlamenco(); break;
+            case Nylon:    updateNylon();    break;
+            default:       updateSteel();    break;
+        }
     }
 
     void updateSteel()
     {
-        // Western / steel-string ideal curve.
         const float bodyDb = 1.2f + wood * 3.3f;
         const float airDb = 2.8f * (1.0f - wood * 0.72f);
         const float presenceDb = -2.5f + presence * 9.5f;
@@ -134,29 +139,53 @@ private:
 
     void updateNylon()
     {
-        // Concert / classical / Spanish nylon.
-        // Warmer mid-body (~200 Hz), less box scoop, softer presence around
-        // 2.2 kHz, almost no 5 kHz sheen, earlier air and top — nylon does
-        // not want steel-string sparkle.
-        const float bodyDb = 2.0f + wood * 3.8f;                 // fuller chest
-        const float airDb = 1.4f * (1.0f - wood * 0.85f);        // restrained air
-        const float presenceDb = -1.5f + presence * 7.0f;        // milder lift
-        const float topHz = 10000.0f - wood * 4500.0f;           // earlier roll-off
-        // Sheen sits lower and quieter — finger tone, not pick sparkle.
+        const float bodyDb = 2.0f + wood * 3.8f;
+        const float airDb = 1.4f * (1.0f - wood * 0.85f);
+        const float presenceDb = -1.5f + presence * 7.0f;
+        const float topHz = 10000.0f - wood * 4500.0f;
         const float sheenDb = std::max(0.0f, (presence - 0.45f) * 3.0f);
 
         highPass.setFromArray(Biquad::makeHighPass(sampleRate, 55.0f, 0.707f));
         bodyShelf.setFromArray(Biquad::makeLowShelf(sampleRate, 200.0f, 0.707f, dbToGain(bodyDb)));
-        // Classical "hollow" / boom is a bit lower than steel boxiness.
         boxCut.setFromArray(Biquad::makePeakFilter(sampleRate, 280.0f, 0.75f,
                                                    dbToGain(-1.0f - wood * 0.8f)));
-        // Soft mid dip higher — leaves the romantic mid-body alone.
         midDip.setFromArray(Biquad::makePeakFilter(sampleRate, 1100.0f, 0.65f, dbToGain(-1.8f)));
         presencePeak.setFromArray(Biquad::makePeakFilter(sampleRate, 2200.0f, 0.7f,
                                                          dbToGain(presenceDb)));
         presenceSheen.setFromArray(Biquad::makePeakFilter(sampleRate, 3800.0f, 0.9f,
                                                           dbToGain(sheenDb)));
         airShelf.setFromArray(Biquad::makeHighShelf(sampleRate, 5600.0f, 0.707f, dbToGain(airDb)));
+        topShelf.setFromArray(Biquad::makeLowPass(sampleRate, topHz, 0.707f));
+    }
+
+    void updateFlamenco()
+    {
+        // Flamenco nylon: tight low end (less boom than concert), mid-bite
+        // for rasgueado / golpe (~1.6–2.5 kHz), nail sheen ~4–5 kHz, air that
+        // cuts earlier than steel but brighter than classical.
+        // Blind A/B vs Nylon: less chest, more attack, more mid projection.
+        const float bodyDb = 0.6f + wood * 2.4f;                 // tighter body
+        const float airDb = 2.2f * (1.0f - wood * 0.65f);        // more air than nylon
+        const float presenceDb = -1.0f + presence * 8.5f;        // strong mid-bite
+        const float topHz = 12000.0f - wood * 4000.0f;
+        const float sheenDb = std::max(0.0f, (presence - 0.25f) * 4.5f);
+
+        highPass.setFromArray(Biquad::makeHighPass(sampleRate, 72.0f, 0.707f));
+        // Body shelf lower/smaller than nylon — flamenco guitars are often
+        // mic'd to avoid the woolly 200 Hz build-up.
+        bodyShelf.setFromArray(Biquad::makeLowShelf(sampleRate, 160.0f, 0.707f, dbToGain(bodyDb)));
+        // Deeper cut on the hollow boom so rasgueados stay articulate.
+        boxCut.setFromArray(Biquad::makePeakFilter(sampleRate, 300.0f, 0.9f,
+                                                   dbToGain(-2.4f - wood * 1.4f)));
+        // Lift the attack band instead of dipping it — opposite of nylon's
+        // romantic mid scoop. A mild dip just below keeps it from getting nasal.
+        midDip.setFromArray(Biquad::makePeakFilter(sampleRate, 700.0f, 0.7f, dbToGain(-1.2f)));
+        // Mid-bite centre — nail / rasgueado projection.
+        presencePeak.setFromArray(Biquad::makePeakFilter(sampleRate, 1900.0f, 0.85f,
+                                                         dbToGain(presenceDb)));
+        presenceSheen.setFromArray(Biquad::makePeakFilter(sampleRate, 4500.0f, 1.0f,
+                                                          dbToGain(sheenDb)));
+        airShelf.setFromArray(Biquad::makeHighShelf(sampleRate, 6500.0f, 0.707f, dbToGain(airDb)));
         topShelf.setFromArray(Biquad::makeLowPass(sampleRate, topHz, 0.707f));
     }
 

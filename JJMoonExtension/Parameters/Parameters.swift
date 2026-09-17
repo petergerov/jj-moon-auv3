@@ -1,11 +1,12 @@
 import Foundation
 import AudioToolbox
 
-/// Curve target voice — steel-string western vs nylon concert / classical.
+/// Curve target voice — steel-string, nylon concert, or flamenco.
 enum JJMoonCurveVoices {
-    static let names = ["Steel", "Nylon"]
+    static let names = ["Steel", "Nylon", "Flamenco"]
     static let steel = 0
     static let nylon = 1
+    static let flamenco = 2
     static let defaultIndex = steel
 }
 

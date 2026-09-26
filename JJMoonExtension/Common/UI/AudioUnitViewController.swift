@@ -62,7 +62,11 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
 
         guard let observableParameterTree = audioUnit.observableParameterTree else { return }
         let breezeAU = audioUnit as? JJMoonAudioUnit
-        let content = JJMoonMainView(parameterTree: observableParameterTree, audioUnit: breezeAU)
+        let content = JJMoonMainView(
+            parameterTree: observableParameterTree,
+            audioUnit: breezeAU,
+            entitlement: .shared
+        )
         preferredContentSize = idealInitialContentSize(for: content)
         let host = HostingController(rootView: content)
         self.addChild(host)
@@ -95,7 +99,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
         let isPad = UIDevice.current.userInterfaceIdiom == .pad
         // Wide enough for the three columns side by side only on a
         // regular-width device — narrower devices fall back to the taller
-        // stacked layout (see wideThreshold in JJMoonMainView).
+        // stacked layout (see wideThreshold in PanelMetrics).
         let width: CGFloat = isPad ? 900 : max(320, min(screen.width, screen.height) - 20)
 
         let measuringHost = HostingController(rootView: content.panelContent(width: width))

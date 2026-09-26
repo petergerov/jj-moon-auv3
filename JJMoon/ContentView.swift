@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    let hostModel: AudioUnitHostModel
-    @Bindable private var entitlement = EntitlementService.shared
+    @Bindable var hostModel: AudioUnitHostModel
+    let entitlement: EntitlementService
     @State private var showPaywall = false
 
     var body: some View {
@@ -27,7 +27,7 @@ struct ContentView: View {
                 showPaywall = true
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: .jjMoonAccessChanged)) { _ in
+        .onChange(of: entitlement.accessState) {
             if case .unlocked = entitlement.accessState {
                 showPaywall = false
             }
@@ -119,7 +119,8 @@ struct ContentView: View {
 
     @ViewBuilder
     private var editor: some View {
-        if hostModel.isLoading {
+        switch hostModel.loadState {
+        case .loading:
             VStack(spacing: 12) {
                 ProgressView()
                 Text("Loading effect…")
@@ -128,24 +129,21 @@ struct ContentView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.black)
-        } else if let viewController = hostModel.viewModel.viewController {
+        case .loaded(let viewController):
             AUViewControllerUI(viewController: viewController)
                 .background(Color.black)
-        } else {
+        case .failed(let message):
             ContentUnavailableView(
                 "Effect did not load",
                 systemImage: "waveform",
-                description: Text(hostModel.viewModel.message)
+                description: Text(message)
             )
         }
     }
 
     private var transport: some View {
         HStack(spacing: 16) {
-            Picker("Source", selection: Binding(
-                get: { hostModel.source },
-                set: { hostModel.setSource($0) }
-            )) {
+            Picker("Source", selection: $hostModel.source) {
                 ForEach(SimplePlayEngine.Source.allCases) { source in
                     Text(source.rawValue)
                         .accessibilityLabel(source.spokenName)
@@ -168,7 +166,7 @@ struct ContentView: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(GearTheme.accent)
-            .disabled(hostModel.viewModel.viewController == nil || hostModel.isLoading)
+            .disabled(hostModel.editor == nil)
         }
         .padding(12)
         .background(Color(red: 0.08, green: 0.08, blue: 0.09))

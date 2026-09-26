@@ -81,7 +81,7 @@ struct LedToggle: View {
     var body: some View {
         Button {
             param.boolValue.toggle()
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            Haptics.impact(.light)
         } label: {
             RockerSwitch(isOn: param.boolValue, theme: GearTheme.current)
                 .contentShape(Rectangle())
@@ -98,7 +98,7 @@ struct BypassToggle: View {
     var body: some View {
         Button {
             isBypassed.toggle()
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            Haptics.impact(.light)
         } label: {
             // Drawn state is the inverse of the flag — a power switch reads
             // on when the effect is actually processing, i.e. not bypassed.
@@ -126,7 +126,7 @@ struct LinkIconBadge: View {
     var body: some View {
         Button {
             isOn.toggle()
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            Haptics.impact(.light)
         } label: {
             Image(systemName: isOn ? "link" : "link.badge.plus")
                 .font(.system(size: 12, weight: .bold))
@@ -178,7 +178,7 @@ struct FinishSelector: View {
         Button {
             let next = finishes[(index + 1) % finishes.count]
             ThemeStore.shared.select(next)
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+            Haptics.impact(.rigid)
         } label: {
             Canvas { context, size in
                 let rect = CGRect(origin: .zero, size: size)

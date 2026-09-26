@@ -167,7 +167,6 @@ public class JJMoonAudioUnit: AUAudioUnit, @unchecked Sendable {
             }
             _currentPreset = preset
             loadedSnapshot = currentParameterSnapshot()
-            NotificationCenter.default.post(name: .jjMoonPresetChanged, object: self)
         }
     }
 
@@ -207,7 +206,6 @@ public class JJMoonAudioUnit: AUAudioUnit, @unchecked Sendable {
             willChangeValue(forKey: "currentPreset")
             _currentPreset = updated
             didChangeValue(forKey: "currentPreset")
-            NotificationCenter.default.post(name: .jjMoonPresetChanged, object: self)
         }
     }
 
@@ -269,11 +267,6 @@ public class JJMoonAudioUnit: AUAudioUnit, @unchecked Sendable {
     /// Sync DSP license gate from App Group cache (updated by EntitlementService).
     public func applyLicenseFromStore() {
         kernel.setLicensed(UnlockStore.cachedEffectAllowed)
-    }
-
-    public func refreshLicenseFromStore() async {
-        await EntitlementService.shared.refresh()
-        applyLicenseFromStore()
     }
 
     func applyFactoryPreset(_ number: Int) {

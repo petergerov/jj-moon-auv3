@@ -83,10 +83,14 @@ struct GainReductionMeter: View {
 
     private let fullScaleDb: Double = 20
 
+    // Per view, not per process: a host running two instances must not
+    // drive one meter's ballistics from both.
+    @State private var follower = GainReductionFollower()
+
     var body: some View {
         TimelineView(.animation) { context in
             let target = audioUnit?.gainReductionDb() ?? 0
-            let shown = GainReductionFollower.shared.tick(now: context.date, target: target)
+            let shown = follower.tick(now: context.date, target: target)
             content(reductionDb: shown)
         }
         .accessibilityElement()
@@ -155,10 +159,12 @@ struct GainReductionMeter: View {
 struct OutputMeter: View {
     let audioUnit: JJMoonAudioUnit?
 
+    @State private var follower = OutputFollower()
+
     var body: some View {
         TimelineView(.animation) { context in
             let peaks = audioUnit?.takeOutputPeaks() ?? (0, 0)
-            let state = OutputFollower.shared.tick(now: context.date, peaks: peaks)
+            let state = follower.tick(now: context.date, peaks: peaks)
             content(state)
         }
         .accessibilityElement()
@@ -252,9 +258,7 @@ struct OutputMeter: View {
 /// Measured at 60 Hz: 99% in 233 ms with 2.4% overshoot. Integrated
 /// semi-implicitly (velocity first, then position) because plain Euler goes
 /// unstable at this stiffness the moment a frame is dropped.
-private final class GainReductionFollower: @unchecked Sendable {
-    static let shared = GainReductionFollower()
-
+private final class GainReductionFollower {
     private var position: Double = 0
     private var velocity: Double = 0
     private var lastDate: Date?
@@ -287,7 +291,7 @@ private final class GainReductionFollower: @unchecked Sendable {
 /// Output level ballistics: instant rise, then a fixed fall in dB per second,
 /// which is how a peak programme meter behaves. Spring ballistics would be
 /// wrong here — for level you want to see the peak, not a mass chasing it.
-private final class OutputFollower: @unchecked Sendable {
+private final class OutputFollower {
     struct State {
         var leftDb: Double
         var rightDb: Double
@@ -297,8 +301,6 @@ private final class OutputFollower: @unchecked Sendable {
         var holdDb: Double
         var clipped: Bool
     }
-
-    static let shared = OutputFollower()
 
     private var left: Double = -120
     private var right: Double = -120
@@ -395,15 +397,17 @@ struct InputMeter: View {
         min(max((db - Self.floorDb) / -Self.floorDb, 0), 1)
     }
 
+    @State private var follower = InputFollower()
+
     var body: some View {
         TimelineView(.animation) { context in
             let peak = audioUnit?.takeInputPeak() ?? 0
-            let state = InputFollower.shared.tick(now: context.date, peak: peak)
+            let state = follower.tick(now: context.date, peak: peak)
             content(state)
         }
         .accessibilityElement()
         .accessibilityLabel("Input level")
-        .accessibilityValue(Self.readout(InputFollower.shared.lastHoldDb))
+        .accessibilityValue(Self.readout(follower.lastHoldDb))
     }
 
     private static func readout(_ db: Double) -> String {
@@ -492,13 +496,11 @@ struct InputMeter: View {
 /// Mono peak ballistics for the input: instant rise, timed fall, 1.5 s hold —
 /// the same programme-meter behaviour as the output pair, which is what lets
 /// the two readouts be compared directly.
-private final class InputFollower: @unchecked Sendable {
+private final class InputFollower {
     struct State {
         var db: Double
         var holdDb: Double
     }
-
-    static let shared = InputFollower()
 
     private var level: Double = -120
     private var hold: Double = -120

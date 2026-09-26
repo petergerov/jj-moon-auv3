@@ -112,7 +112,7 @@ final class ObservableAUParameterGroup: ObservableAUParameterNode {
 final class ObservableAUParameter: ObservableAUParameterNode {
 
     private weak var parameter: AUParameter?
-    private var observerToken: AUParameterObserverToken!
+    @ObservationIgnored private let observation: ParameterObservation
     private var editingState: EditingState = .inactive
 
     let min: AUValue
@@ -132,15 +132,17 @@ final class ObservableAUParameter: ObservableAUParameterNode {
         self.defaultValue = ParameterDefaults.values[parameter.address] ?? parameter.value
         self.unit = parameter.unit
         self.address = parameter.address
+        self.observation = ParameterObservation(parameter: parameter)
         super.init()
 
         /// Use the parameter.token(byAddingParameterObserver:) function to monitor for parameter
         /// changes from the host. The only role of this callback is to update the UI if the value is changed by the host.
-        self.observerToken = parameter.token { @Sendable (_ address: AUParameterAddress, _ auValue: AUValue) in
+        /// Weak, so the tree's observer list doesn't keep this node (and every node from a
+        /// previous view) alive; `observation` removes the registration when it goes.
+        observation.token = parameter.token { @Sendable [weak self] (_ address: AUParameterAddress, _ auValue: AUValue) in
+            Task { @MainActor in
+                guard let self, address == self.parameter?.address else { return }
 
-            DispatchQueue.main.async {
-                guard address == self.parameter?.address else { return }
-                
                 // Don't update the UI if the user is currently interacting
                 guard self.editingState == .inactive else { return }
 
@@ -159,7 +161,7 @@ final class ObservableAUParameter: ObservableAUParameterNode {
             let automationEventType = resolveEventType()
             parameter?.setValue(
                 value,
-                originator: observerToken,
+                originator: observation.token,
                 atHostTime: 0,
                 eventType: automationEventType
             )
@@ -218,6 +220,24 @@ final class ObservableAUParameter: ObservableAUParameterNode {
         case active
         case ended
         case hostUpdate
+    }
+}
+
+/// Owns a host-observer registration and removes it on deinit. A separate
+/// object because the MainActor-isolated parameter's nonisolated deinit
+/// can't touch its own non-Sendable stored properties.
+private final class ParameterObservation: @unchecked Sendable {
+    weak var parameter: AUParameter?
+    var token: AUParameterObserverToken?
+
+    init(parameter: AUParameter) {
+        self.parameter = parameter
+    }
+
+    deinit {
+        if let token {
+            parameter?.removeParameterObserver(token)
+        }
     }
 }
 

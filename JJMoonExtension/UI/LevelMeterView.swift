@@ -3,10 +3,14 @@ import SwiftUI
 struct LevelMeterView: View {
     let audioUnit: JJMoonAudioUnit?
 
+    // Per view, not per process: a host running two instances must not mix
+    // their envelopes.
+    @State private var envelope = Envelope()
+
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1.0 / 20.0)) { context in
             let peaks = audioUnit?.takeMeterPeaks() ?? (0, 0)
-            let env = Envelope.shared.tick(now: context.date, peaks: peaks)
+            let env = envelope.tick(now: context.date, peaks: peaks)
             MeterBars(input: env.input, output: env.output, theme: GearTheme.current)
         }
         .frame(width: 58, height: 32)
@@ -81,8 +85,7 @@ private struct MeterBars: View {
 }
 
 /// Holds decaying peak envelopes so the DSP can reset peaks each poll.
-private final class Envelope: @unchecked Sendable {
-    static let shared = Envelope()
+private final class Envelope {
     private var input: Float = 0
     private var output: Float = 0
     private var lastDate = Date.distantPast

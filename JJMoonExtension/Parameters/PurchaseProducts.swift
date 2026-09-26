@@ -33,7 +33,3 @@ enum AccessState: Equatable, Sendable {
         }
     }
 }
-
-extension Notification.Name {
-    static let jjMoonAccessChanged = Notification.Name("jjMoonAccessChanged")
-}

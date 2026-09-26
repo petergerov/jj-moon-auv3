@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		00817146B456581BCE09BF8F /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E765EDA5D373F5D7C722F6 /* String+Utils.swift */; };
+		064487619F3B89B5978F5DD1 /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C475B59D778D6F1EEA366 /* SharedDefaults.swift */; };
 		067BD294FCF35DB607DF306B /* Meters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95382D7FEA7434636657E7A7 /* Meters.swift */; };
+		093F5C5F86FCDFFA6E9BBD9B /* PresetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D253A71730044A5B35959 /* PresetListViewModel.swift */; };
+		0E2FB7829972F62D3B01F22B /* PanelHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDE5E9048ADAAB5A641080 /* PanelHeader.swift */; };
 		0F7D878F6E4FAD5BC625F755 /* JJMoonAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */; };
 		1649A2B745720E1A036BBC24 /* ParameterSpecBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF0EC30F0DBDEB020162D /* ParameterSpecBase.swift */; };
 		1A567351740980776764D433 /* KnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A969A466E25B9C4C8BE797 /* KnobView.swift */; };
+		1F56432C7263D54E26E4204E /* MasterStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CB96887C7CE12B4D52D4BD /* MasterStrip.swift */; };
 		2386F02D460A90C1F3E99A28 /* UserPresetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63868DD7C6929D4F717C8BC6 /* UserPresetStore.swift */; };
 		2502380956FF8CF5AD03C9E6 /* UnlockStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */; };
 		2C49CF1181AE7D08DAF3C597 /* Skew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC23E50CD2B11FA83684B39 /* Skew.swift */; };
@@ -19,38 +23,49 @@
 		2E5C8742DC50848984271F90 /* LedToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AB231EC522F26E8762B2F4 /* LedToggle.swift */; };
 		3AC16A22B1E9008E9E44186B /* GearTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C04D9038A0294D899ED52BB /* GearTheme.swift */; };
 		3BD3D6BB6003FE0B4BA35ED0 /* acoustic-guitar-chords-loneliness.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9503B842DA6201063B4F5DDD /* acoustic-guitar-chords-loneliness.mp3 */; };
+		3F260F031E431FC549481C71 /* PresetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5D253A71730044A5B35959 /* PresetListViewModel.swift */; };
 		41DD44FE6904EAE0F3081FB3 /* ParameterSpecBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22DFF0EC30F0DBDEB020162D /* ParameterSpecBase.swift */; };
 		47D3B26043CEC81A55015C9C /* ViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C1CFE3A2EACC710F527573 /* ViewControllerRepresentable.swift */; };
+		49D0DB49639DAD00C4FF49AF /* PanelMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0922E9ACCC22AE2D67AC5A /* PanelMetrics.swift */; };
 		4F711A92914A6F3EF8347FDA /* ScreenshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FC4B73CD9FA3636A8E200C /* ScreenshotTests.swift */; };
 		4F7FCC62EE86B1F6549A3B94 /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9EA0E32A0FC7EE1D964AB /* StringHelpers.swift */; };
 		50E82C33F69AC4A48667CBD6 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8CCD29E641E7F9676B170 /* Presets.swift */; };
 		59F37619E1519E69E8C00213 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98081657304936F43690C94E /* PaywallView.swift */; };
+		5DB916E6C2F0B51EFFBE4D47 /* KnobHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1B11D2639E51EAFF7856F /* KnobHelp.swift */; };
 		5FEB769B6AF43D3909B504E6 /* Skew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC23E50CD2B11FA83684B39 /* Skew.swift */; };
 		634D2F2423292D714352EC5E /* LevelMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB53881E177133C97748B9 /* LevelMeterView.swift */; };
 		63A8277142270253DE8A8755 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B4EEDAA6B25C68F4D76D3A /* Parameters.swift */; };
 		65BCEE5447C847654C41C6CA /* AudioUnitHostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B21A0F5445007DDE5CFE9EC /* AudioUnitHostModel.swift */; };
 		65E42E70B7AFFD4B4C5104BC /* KnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A969A466E25B9C4C8BE797 /* KnobView.swift */; };
+		6AAB73D7E9D93F6015D3846D /* PanelMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0922E9ACCC22AE2D67AC5A /* PanelMetrics.swift */; };
+		711D34AF92DC69C514374CA2 /* PanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF1BCCD17DB5949CFDC457 /* PanelViewModel.swift */; };
 		7CFEC9C01B179A8338521B68 /* Presets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF8CCD29E641E7F9676B170 /* Presets.swift */; };
 		7DE6C6F061FD26C64566603F /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98081657304936F43690C94E /* PaywallView.swift */; };
 		7EA50F0A06ABF435B3A6C41D /* PresetBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FC6056468CC6532C330090 /* PresetBar.swift */; };
 		81B0C078B439B770620B85EA /* nylon-2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3272C507F7E5B8C3BC38E48A /* nylon-2.mp3 */; };
 		8A0B193DC6EAD092CC8B5384 /* EntitlementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62C8A0524C48F82EC6E63C /* EntitlementService.swift */; };
+		8A6C237754762879ED7867BC /* KnobHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB1B11D2639E51EAFF7856F /* KnobHelp.swift */; };
 		8FEC99F028D30514FA1B0509 /* UnlockStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */; };
 		91A21B83A1F16DA5139B33D3 /* GearTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C04D9038A0294D899ED52BB /* GearTheme.swift */; };
+		99F882F5F19D24ACB4DDC34E /* MasterStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1CB96887C7CE12B4D52D4BD /* MasterStrip.swift */; };
 		9A30C19FE2914BF157F85644 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E765EDA5D373F5D7C722F6 /* String+Utils.swift */; };
 		9AB33FEF7F939A5A6609FEE0 /* JJMoonMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B245AD96B2808B325BA1527 /* JJMoonMainView.swift */; };
+		9AE0E9FB2BDF8B461FD7330F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA6F928405DA9EBB177335 /* Haptics.swift */; };
 		ADEBE4B359FD3AD931E25142 /* PurchaseProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C63CB9C77BF29E638920A59 /* PurchaseProducts.swift */; };
 		B17ACCFD902FE3A41EAA8791 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEA83DB6A1979B38F270F0 /* SimplePlayEngine.swift */; };
+		B1B0D0DBBAD0396EEF7EFA1C /* PanelHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BDE5E9048ADAAB5A641080 /* PanelHeader.swift */; };
 		B887D848381CF7AF08E85DA9 /* JJMoonExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5609ACC02D76822B4E734B9B /* JJMoonExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA28CEE198DF51BE5CBEF207 /* EntitlementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB62C8A0524C48F82EC6E63C /* EntitlementService.swift */; };
 		BA968FBA312F2C89EC80BA91 /* LedToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AB231EC522F26E8762B2F4 /* LedToggle.swift */; };
 		BE92C0997EB0FF285AF99AF9 /* PurchaseProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C63CB9C77BF29E638920A59 /* PurchaseProducts.swift */; };
-		C2B3ADDBEC2D9B4BE7EC56F7 /* AudioUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787EB4C6AB50F32F2160F4DC /* AudioUnitViewModel.swift */; };
+		BF884C9747FECBEC087FDC71 /* PanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EF1BCCD17DB5949CFDC457 /* PanelViewModel.swift */; };
+		C22A04DF7754F96C93DEB3CE /* SharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632C475B59D778D6F1EEA366 /* SharedDefaults.swift */; };
 		C4253149A56CADBEB83C5936 /* RackPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582CE55C8687336BCC7AC5F /* RackPanel.swift */; };
 		C4A41B911229A023F3A52E4C /* JJMoonMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B245AD96B2808B325BA1527 /* JJMoonMainView.swift */; };
 		D466C0DF3ED11F403D84DE8B /* chillin-acoustic-guitar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3E3C42F42D68524DEFBCE754 /* chillin-acoustic-guitar.mp3 */; };
 		D490C18F6E63172F4AFF5859 /* Meters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95382D7FEA7434636657E7A7 /* Meters.swift */; };
 		D52AEBCB4EE8D9B5CEFE022E /* nylon-3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6AF7C0AF95BC6BA4EF2D09D /* nylon-3.mp3 */; };
+		D5E41CE3F717ECC11249F00D /* PanelSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CFB0DA6CCF4A339B9052C /* PanelSections.swift */; };
 		D6A736F0FFCCE901A6D2248F /* JJMoonAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */; };
 		D964BAA5797D266C54DAFBE2 /* nylon-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC77BFE9E7B588491E06F06C /* nylon-1.mp3 */; };
 		D96A8103DE3FE17CB6FD4785 /* RackPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4582CE55C8687336BCC7AC5F /* RackPanel.swift */; };
@@ -58,14 +73,15 @@
 		DDDF2131B8CC5EE14740C862 /* CrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E6F998C7AF2036B2D429 /* CrossPlatform.swift */; };
 		DF01A56EF1C6E8FD4A6FFB89 /* ObservableAUParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4376EE8308ACD4F31940EF /* ObservableAUParameter.swift */; };
 		E2AB7047F60BC5477D9406BE /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C12152735469A90296E00E9 /* AudioUnitViewController.swift */; };
+		E2B9F9A8D398E37EBF73B0A2 /* PanelSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1CFB0DA6CCF4A339B9052C /* PanelSections.swift */; };
 		E35916F77915EC7A2411F9CB /* acoustic-guitar-melody-calm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295B31CA2D0C6E08572BE14D /* acoustic-guitar-melody-calm.mp3 */; };
 		E5D2DE20141BEDC45423A87B /* PresetBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FC6056468CC6532C330090 /* PresetBar.swift */; };
 		E968F45A0D4FA61352502130 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD2864D28CC30C02690554A6 /* Assets.xcassets */; };
 		ECFEEB59B38EC44D22CB679D /* LevelMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB53881E177133C97748B9 /* LevelMeterView.swift */; };
-		EEB47DF82088600E5ACDBD45 /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27657DEC89B5982CA46F4F66 /* TypeAliases.swift */; };
 		EF46239B6F1BFAB6DB15938B /* ExceptionCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DEE07FF83102CFF3E2011A /* ExceptionCatcher.m */; };
 		F15306236082FB481847F5B9 /* CrossPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E328E6F998C7AF2036B2D429 /* CrossPlatform.swift */; };
 		F19BF74103E16F351F55A66D /* ObservableAUParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4376EE8308ACD4F31940EF /* ObservableAUParameter.swift */; };
+		F2FAB325BBF16B5BE5AD5521 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA6F928405DA9EBB177335 /* Haptics.swift */; };
 		F437C8835CE1F9081A8D8C48 /* JJMoonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D87F264E01978A2E905FD4E /* JJMoonApp.swift */; };
 		FB53FFC83C1B0E355CC94432 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E807A8296FEC1CA6CDDB64BC /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -103,21 +119,22 @@
 
 /* Begin PBXFileReference section */
 		009E71F65767367B13CFF0F1 /* PitchShifter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PitchShifter.h; sourceTree = "<group>"; };
-		0171FEB8812F744E6E326AAF /* JJMoon.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = JJMoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01B90731FDCEC126D2BE11CB /* RoomBloom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomBloom.h; sourceTree = "<group>"; };
+		01BDE5E9048ADAAB5A641080 /* PanelHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelHeader.swift; sourceTree = "<group>"; };
 		02A9EA0E32A0FC7EE1D964AB /* StringHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
 		0C12152735469A90296E00E9 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		0D12365DD19B0590D391CAD9 /* AcousticCurve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcousticCurve.h; sourceTree = "<group>"; };
 		0E5CE2E5719E1CC487E39BBA /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		10FC4B73CD9FA3636A8E200C /* ScreenshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotTests.swift; sourceTree = "<group>"; };
+		12EF1BCCD17DB5949CFDC457 /* PanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewModel.swift; sourceTree = "<group>"; };
 		22DFF0EC30F0DBDEB020162D /* ParameterSpecBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterSpecBase.swift; sourceTree = "<group>"; };
 		24A969A466E25B9C4C8BE797 /* KnobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnobView.swift; sourceTree = "<group>"; };
-		27657DEC89B5982CA46F4F66 /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
 		28739A93C3BCD330BC99189C /* JJMoonDSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JJMoonDSPKernel.hpp; sourceTree = "<group>"; };
 		295B31CA2D0C6E08572BE14D /* acoustic-guitar-melody-calm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "acoustic-guitar-melody-calm.mp3"; sourceTree = "<group>"; };
 		2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJMoonAudioUnit.swift; sourceTree = "<group>"; };
 		3241E912A7D51EA396B13131 /* JJMoonScreenshots.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = JJMoonScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3272C507F7E5B8C3BC38E48A /* nylon-2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "nylon-2.mp3"; sourceTree = "<group>"; };
+		3A5F5FB79EBD4021FA24DF7D /* jj-moon.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "jj-moon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C04D9038A0294D899ED52BB /* GearTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearTheme.swift; sourceTree = "<group>"; };
 		3DF8CCD29E641E7F9676B170 /* Presets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presets.swift; sourceTree = "<group>"; };
 		3E3C42F42D68524DEFBCE754 /* chillin-acoustic-guitar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "chillin-acoustic-guitar.mp3"; sourceTree = "<group>"; };
@@ -129,11 +146,13 @@
 		4C63CB9C77BF29E638920A59 /* PurchaseProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProducts.swift; sourceTree = "<group>"; };
 		5609ACC02D76822B4E734B9B /* JJMoonExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = JJMoonExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D89A6EAB83D46B741D65FC3 /* ModulatedDelay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModulatedDelay.h; sourceTree = "<group>"; };
+		5F1CFB0DA6CCF4A339B9052C /* PanelSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelSections.swift; sourceTree = "<group>"; };
+		632C475B59D778D6F1EEA366 /* SharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDefaults.swift; sourceTree = "<group>"; };
 		63868DD7C6929D4F717C8BC6 /* UserPresetStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPresetStore.swift; sourceTree = "<group>"; };
 		6A24215070A6A3CF16B5CDA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6D87F264E01978A2E905FD4E /* JJMoonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJMoonApp.swift; sourceTree = "<group>"; };
-		787EB4C6AB50F32F2160F4DC /* AudioUnitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewModel.swift; sourceTree = "<group>"; };
 		87FC6056468CC6532C330090 /* PresetBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetBar.swift; sourceTree = "<group>"; };
+		8BB1B11D2639E51EAFF7856F /* KnobHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnobHelp.swift; sourceTree = "<group>"; };
 		8BDEA83DB6A1979B38F270F0 /* SimplePlayEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePlayEngine.swift; sourceTree = "<group>"; };
 		9503B842DA6201063B4F5DDD /* acoustic-guitar-chords-loneliness.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "acoustic-guitar-chords-loneliness.mp3"; sourceTree = "<group>"; };
 		95382D7FEA7434636657E7A7 /* Meters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meters.swift; sourceTree = "<group>"; };
@@ -141,6 +160,7 @@
 		9B21A0F5445007DDE5CFE9EC /* AudioUnitHostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitHostModel.swift; sourceTree = "<group>"; };
 		9B245AD96B2808B325BA1527 /* JJMoonMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JJMoonMainView.swift; sourceTree = "<group>"; };
 		9CEF8524555693F315D244C0 /* JJMoonExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JJMoonExtension.entitlements; sourceTree = "<group>"; };
+		9E0922E9ACCC22AE2D67AC5A /* PanelMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelMetrics.swift; sourceTree = "<group>"; };
 		A0AB231EC522F26E8762B2F4 /* LedToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LedToggle.swift; sourceTree = "<group>"; };
 		A80F5F7D6EB3FD1551DF6668 /* JJMoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JJMoon.entitlements; sourceTree = "<group>"; };
 		AC77BFE9E7B588491E06F06C /* nylon-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "nylon-1.mp3"; sourceTree = "<group>"; };
@@ -152,15 +172,18 @@
 		C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockStore.swift; sourceTree = "<group>"; };
 		CB4376EE8308ACD4F31940EF /* ObservableAUParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableAUParameter.swift; sourceTree = "<group>"; };
 		D124D7B0C33DFE6BD04F34E3 /* Biquad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Biquad.hpp; sourceTree = "<group>"; };
+		D1CB96887C7CE12B4D52D4BD /* MasterStrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterStrip.swift; sourceTree = "<group>"; };
 		D8B035FE2C3CBE0D85470EFC /* JJMoonAUProcessHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JJMoonAUProcessHelper.hpp; sourceTree = "<group>"; };
 		DB62C8A0524C48F82EC6E63C /* EntitlementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementService.swift; sourceTree = "<group>"; };
 		DD2864D28CC30C02690554A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DF5D253A71730044A5B35959 /* PresetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetListViewModel.swift; sourceTree = "<group>"; };
 		E328E6F998C7AF2036B2D429 /* CrossPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossPlatform.swift; sourceTree = "<group>"; };
 		E6FADD5D017C5ADE2E95350C /* JJMoonParameterAddresses.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JJMoonParameterAddresses.h; sourceTree = "<group>"; };
 		E7D9233AB3136EB1D8BFCA9B /* JJMoon-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JJMoon-Bridging-Header.h"; sourceTree = "<group>"; };
 		E807A8296FEC1CA6CDDB64BC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E8E765EDA5D373F5D7C722F6 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		EF42A489B956FFB9D86D25BE /* JJMoonApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JJMoonApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		F8AA6F928405DA9EBB177335 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		F9A0229BD6852D8B94E61221 /* DSPCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSPCommon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,7 +204,7 @@
 		2A3BE64E364104B31DA14E29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0171FEB8812F744E6E326AAF /* JJMoon.app */,
+				3A5F5FB79EBD4021FA24DF7D /* jj-moon.app */,
 				5609ACC02D76822B4E734B9B /* JJMoonExtension.appex */,
 				3241E912A7D51EA396B13131 /* JJMoonScreenshots.xctest */,
 			);
@@ -196,7 +219,6 @@
 				EF42A489B956FFB9D86D25BE /* JJMoonApp-Bridging-Header.h */,
 				8BDEA83DB6A1979B38F270F0 /* SimplePlayEngine.swift */,
 				02A9EA0E32A0FC7EE1D964AB /* StringHelpers.swift */,
-				27657DEC89B5982CA46F4F66 /* TypeAliases.swift */,
 				40C1CFE3A2EACC710F527573 /* ViewControllerRepresentable.swift */,
 			);
 			path = Common;
@@ -218,12 +240,19 @@
 		39C306B57E75F9A809B143A8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				5C0E2F0F8E0176EC24105306 /* ViewModels */,
 				3C04D9038A0294D899ED52BB /* GearTheme.swift */,
+				F8AA6F928405DA9EBB177335 /* Haptics.swift */,
 				9B245AD96B2808B325BA1527 /* JJMoonMainView.swift */,
+				8BB1B11D2639E51EAFF7856F /* KnobHelp.swift */,
 				24A969A466E25B9C4C8BE797 /* KnobView.swift */,
 				A0AB231EC522F26E8762B2F4 /* LedToggle.swift */,
 				49BB53881E177133C97748B9 /* LevelMeterView.swift */,
+				D1CB96887C7CE12B4D52D4BD /* MasterStrip.swift */,
 				95382D7FEA7434636657E7A7 /* Meters.swift */,
+				01BDE5E9048ADAAB5A641080 /* PanelHeader.swift */,
+				9E0922E9ACCC22AE2D67AC5A /* PanelMetrics.swift */,
+				5F1CFB0DA6CCF4A339B9052C /* PanelSections.swift */,
 				98081657304936F43690C94E /* PaywallView.swift */,
 				87FC6056468CC6532C330090 /* PresetBar.swift */,
 				4582CE55C8687336BCC7AC5F /* RackPanel.swift */,
@@ -258,6 +287,15 @@
 				2A853369790E0A0174F700CE /* JJMoonAudioUnit.swift */,
 			);
 			path = "Audio Unit";
+			sourceTree = "<group>";
+		};
+		5C0E2F0F8E0176EC24105306 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				12EF1BCCD17DB5949CFDC457 /* PanelViewModel.swift */,
+				DF5D253A71730044A5B35959 /* PresetListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		6729F0B2CF86CB799DF0F980 /* DSP */ = {
@@ -323,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				9B21A0F5445007DDE5CFE9EC /* AudioUnitHostModel.swift */,
-				787EB4C6AB50F32F2160F4DC /* AudioUnitViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -344,6 +381,7 @@
 				42B4EEDAA6B25C68F4D76D3A /* Parameters.swift */,
 				3DF8CCD29E641E7F9676B170 /* Presets.swift */,
 				4C63CB9C77BF29E638920A59 /* PurchaseProducts.swift */,
+				632C475B59D778D6F1EEA366 /* SharedDefaults.swift */,
 				C2E08A89901DBF7D824DCFB6 /* UnlockStore.swift */,
 				63868DD7C6929D4F717C8BC6 /* UserPresetStore.swift */,
 			);
@@ -379,7 +417,7 @@
 			packageProductDependencies = (
 			);
 			productName = JJMoon;
-			productReference = 0171FEB8812F744E6E326AAF /* JJMoon.app */;
+			productReference = 3A5F5FB79EBD4021FA24DF7D /* jj-moon.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6DBB0881E2A5821A3F8EBF40 /* JJMoonExtension */ = {
@@ -496,20 +534,29 @@
 				F15306236082FB481847F5B9 /* CrossPlatform.swift in Sources */,
 				BA28CEE198DF51BE5CBEF207 /* EntitlementService.swift in Sources */,
 				91A21B83A1F16DA5139B33D3 /* GearTheme.swift in Sources */,
+				F2FAB325BBF16B5BE5AD5521 /* Haptics.swift in Sources */,
 				D6A736F0FFCCE901A6D2248F /* JJMoonAudioUnit.swift in Sources */,
 				9AB33FEF7F939A5A6609FEE0 /* JJMoonMainView.swift in Sources */,
+				8A6C237754762879ED7867BC /* KnobHelp.swift in Sources */,
 				65E42E70B7AFFD4B4C5104BC /* KnobView.swift in Sources */,
 				BA968FBA312F2C89EC80BA91 /* LedToggle.swift in Sources */,
 				ECFEEB59B38EC44D22CB679D /* LevelMeterView.swift in Sources */,
+				1F56432C7263D54E26E4204E /* MasterStrip.swift in Sources */,
 				067BD294FCF35DB607DF306B /* Meters.swift in Sources */,
 				F19BF74103E16F351F55A66D /* ObservableAUParameter.swift in Sources */,
+				0E2FB7829972F62D3B01F22B /* PanelHeader.swift in Sources */,
+				6AAB73D7E9D93F6015D3846D /* PanelMetrics.swift in Sources */,
+				E2B9F9A8D398E37EBF73B0A2 /* PanelSections.swift in Sources */,
+				711D34AF92DC69C514374CA2 /* PanelViewModel.swift in Sources */,
 				41DD44FE6904EAE0F3081FB3 /* ParameterSpecBase.swift in Sources */,
 				63A8277142270253DE8A8755 /* Parameters.swift in Sources */,
 				7DE6C6F061FD26C64566603F /* PaywallView.swift in Sources */,
 				E5D2DE20141BEDC45423A87B /* PresetBar.swift in Sources */,
+				093F5C5F86FCDFFA6E9BBD9B /* PresetListViewModel.swift in Sources */,
 				7CFEC9C01B179A8338521B68 /* Presets.swift in Sources */,
 				ADEBE4B359FD3AD931E25142 /* PurchaseProducts.swift in Sources */,
 				C4253149A56CADBEB83C5936 /* RackPanel.swift in Sources */,
+				064487619F3B89B5978F5DD1 /* SharedDefaults.swift in Sources */,
 				5FEB769B6AF43D3909B504E6 /* Skew.swift in Sources */,
 				9A30C19FE2914BF157F85644 /* String+Utils.swift in Sources */,
 				8FEC99F028D30514FA1B0509 /* UnlockStore.swift in Sources */,
@@ -522,32 +569,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				65BCEE5447C847654C41C6CA /* AudioUnitHostModel.swift in Sources */,
-				C2B3ADDBEC2D9B4BE7EC56F7 /* AudioUnitViewModel.swift in Sources */,
 				FB53FFC83C1B0E355CC94432 /* ContentView.swift in Sources */,
 				DDDF2131B8CC5EE14740C862 /* CrossPlatform.swift in Sources */,
 				8A0B193DC6EAD092CC8B5384 /* EntitlementService.swift in Sources */,
 				EF46239B6F1BFAB6DB15938B /* ExceptionCatcher.m in Sources */,
 				3AC16A22B1E9008E9E44186B /* GearTheme.swift in Sources */,
+				9AE0E9FB2BDF8B461FD7330F /* Haptics.swift in Sources */,
 				F437C8835CE1F9081A8D8C48 /* JJMoonApp.swift in Sources */,
 				0F7D878F6E4FAD5BC625F755 /* JJMoonAudioUnit.swift in Sources */,
 				C4A41B911229A023F3A52E4C /* JJMoonMainView.swift in Sources */,
+				5DB916E6C2F0B51EFFBE4D47 /* KnobHelp.swift in Sources */,
 				1A567351740980776764D433 /* KnobView.swift in Sources */,
 				2E5C8742DC50848984271F90 /* LedToggle.swift in Sources */,
 				634D2F2423292D714352EC5E /* LevelMeterView.swift in Sources */,
+				99F882F5F19D24ACB4DDC34E /* MasterStrip.swift in Sources */,
 				D490C18F6E63172F4AFF5859 /* Meters.swift in Sources */,
 				DF01A56EF1C6E8FD4A6FFB89 /* ObservableAUParameter.swift in Sources */,
+				B1B0D0DBBAD0396EEF7EFA1C /* PanelHeader.swift in Sources */,
+				49D0DB49639DAD00C4FF49AF /* PanelMetrics.swift in Sources */,
+				D5E41CE3F717ECC11249F00D /* PanelSections.swift in Sources */,
+				BF884C9747FECBEC087FDC71 /* PanelViewModel.swift in Sources */,
 				1649A2B745720E1A036BBC24 /* ParameterSpecBase.swift in Sources */,
 				2C9AC81A0FBD5D32951EEECF /* Parameters.swift in Sources */,
 				59F37619E1519E69E8C00213 /* PaywallView.swift in Sources */,
 				7EA50F0A06ABF435B3A6C41D /* PresetBar.swift in Sources */,
+				3F260F031E431FC549481C71 /* PresetListViewModel.swift in Sources */,
 				50E82C33F69AC4A48667CBD6 /* Presets.swift in Sources */,
 				BE92C0997EB0FF285AF99AF9 /* PurchaseProducts.swift in Sources */,
 				D96A8103DE3FE17CB6FD4785 /* RackPanel.swift in Sources */,
+				C22A04DF7754F96C93DEB3CE /* SharedDefaults.swift in Sources */,
 				B17ACCFD902FE3A41EAA8791 /* SimplePlayEngine.swift in Sources */,
 				2C49CF1181AE7D08DAF3C597 /* Skew.swift in Sources */,
 				00817146B456581BCE09BF8F /* String+Utils.swift in Sources */,
 				4F7FCC62EE86B1F6549A3B94 /* StringHelpers.swift in Sources */,
-				EEB47DF82088600E5ACDBD45 /* TypeAliases.swift in Sources */,
 				2502380956FF8CF5AD03C9E6 /* UnlockStore.swift in Sources */,
 				2386F02D460A90C1F3E99A28 /* UserPresetStore.swift in Sources */,
 				47D3B26043CEC81A55015C9C /* ViewControllerRepresentable.swift in Sources */,
@@ -670,7 +724,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -783,7 +837,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;

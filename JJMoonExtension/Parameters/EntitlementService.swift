@@ -113,7 +113,6 @@ final class EntitlementService {
         guard state != accessState else { return }
         accessState = state
         UnlockStore.write(accessState: state)
-        NotificationCenter.default.post(name: .jjMoonAccessChanged, object: nil)
     }
 
     private static func matchingUnlock(

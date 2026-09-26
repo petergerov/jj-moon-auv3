@@ -106,7 +106,12 @@ public class SimplePlayEngine {
         return buffer
     }
 
-    func initComponent(type: String, subType: String, manufacturer: String) async -> ViewController? {
+    func initComponent(
+        type: String,
+        subType: String,
+        manufacturer: String,
+        entitlement: EntitlementService
+    ) async -> UIViewController? {
         reset()
         configureSession(for: source)
 
@@ -129,7 +134,7 @@ public class SimplePlayEngine {
 
         do {
             let audioUnit = try await AVAudioUnit.instantiate(with: local, options: [])
-            return finishLoadInProcess(audioUnit)
+            return finishLoadInProcess(audioUnit, entitlement: entitlement)
         } catch {
             lastError = "Could not start the built-in effect: \(error.localizedDescription)"
             log.error("Standalone AU failed: \(error.localizedDescription, privacy: .public)")
@@ -137,7 +142,7 @@ public class SimplePlayEngine {
         }
     }
 
-    private func finishLoadInProcess(_ audioUnit: AVAudioUnit) -> ViewController? {
+    private func finishLoadInProcess(_ audioUnit: AVAudioUnit, entitlement: EntitlementService) -> UIViewController? {
         guard let unit = audioUnit.auAudioUnit as? JJMoonAudioUnit else {
             lastError = "Built-in effect did not load in-process."
             return nil
@@ -153,7 +158,7 @@ public class SimplePlayEngine {
             lastError = "Effect parameters failed to load."
             return nil
         }
-        let host = HostingController(rootView: JJMoonMainView(parameterTree: tree, audioUnit: unit))
+        let host = HostingController(rootView: JJMoonMainView(parameterTree: tree, audioUnit: unit, entitlement: entitlement))
         host.view.backgroundColor = .black
         return host
     }

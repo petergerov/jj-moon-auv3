@@ -6,87 +6,53 @@ import SwiftUI
 /// delete or rename it) and a "Save As…" entry — so the panel header needs
 /// no separate save/manage/step buttons beside it.
 struct PresetBar: View {
-    let audioUnit: JJMoonAudioUnit?
-
-    @State private var title = "Default"
-    @State private var currentNumber: Int?
-    @State private var userPresets: [AUAudioUnitPreset] = []
-    @State private var showPicker = false
-    @State private var showSave = false
-    @State private var saveName = ""
-    @State private var renameTarget: AUAudioUnitPreset?
-    @State private var renameText = ""
-    // A sheet can't be raised while the dropdown is still up, so "Save As…"
-    // and Rename only mark what to do and close the popover; the actual
-    // sheet is presented from the popover's onDismiss below.
-    @State private var pendingSave = false
-    @State private var pendingRename: AUAudioUnitPreset?
-    @State private var errorMessage: String?
+    @Bindable var viewModel: PresetListViewModel
 
     var body: some View {
         Button {
-            reload()
-            showPicker = true
+            viewModel.openPicker()
         } label: {
             selectorLabel
         }
         .buttonStyle(.plain)
-        .disabled(audioUnit == nil)
+        .disabled(!viewModel.isAvailable)
         .accessibilityLabel("Preset")
-        .accessibilityValue(title)
-        .popover(isPresented: $showPicker) {
+        .accessibilityValue(viewModel.title)
+        .popover(isPresented: $viewModel.isPickerShown) {
             presetList
                 .frame(idealWidth: 300, idealHeight: 380)
                 .presentationCompactAdaptation(.popover)
         }
-        .onChange(of: showPicker) { _, isShown in
-            guard !isShown, pendingSave || pendingRename != nil else { return }
-            Task {
-                // Let the popover finish dismissing first — UIKit drops a
-                // sheet presented while another dismissal is still running.
-                try? await Task.sleep(for: .milliseconds(350))
-                presentPendingSheet()
-            }
+        .task(id: viewModel.isPickerShown) {
+            await viewModel.presentPendingSheetAfterDismissal()
         }
-        .onAppear(perform: reload)
-        .onReceive(NotificationCenter.default.publisher(for: .jjMoonPresetChanged)) { _ in
-            reload()
+        .task {
+            viewModel.start()
         }
-        .sheet(isPresented: $showSave) {
+        .sheet(isPresented: $viewModel.isSaveSheetShown) {
             PresetNameSheet(
                 title: "Save Preset",
                 caption: "Saves the current knobs. A preset with the same name is replaced.",
-                name: $saveName,
+                name: $viewModel.saveName,
                 confirmTitle: "Save",
-                onCancel: { showSave = false },
-                onConfirm: { save() }
+                onCancel: { viewModel.isSaveSheetShown = false },
+                onConfirm: { viewModel.save() }
             )
         }
-        .sheet(isPresented: Binding(
-            get: { renameTarget != nil },
-            set: { if !$0 { renameTarget = nil } }
-        )) {
+        .sheet(isPresented: $viewModel.isRenameSheetShown) {
             PresetNameSheet(
                 title: "Rename Preset",
                 caption: "The new name replaces this user preset.",
-                name: $renameText,
+                name: $viewModel.renameText,
                 confirmTitle: "Rename",
-                onCancel: { renameTarget = nil },
-                onConfirm: {
-                    if let preset = renameTarget {
-                        rename(preset, to: renameText)
-                    }
-                    renameTarget = nil
-                }
+                onCancel: { viewModel.isRenameSheetShown = false },
+                onConfirm: { viewModel.confirmRename() }
             )
         }
-        .alert("Preset", isPresented: Binding(
-            get: { errorMessage != nil },
-            set: { if !$0 { errorMessage = nil } }
-        )) {
-            Button("OK", role: .cancel) { errorMessage = nil }
+        .alert("Preset", isPresented: $viewModel.isErrorShown) {
+            Button("OK", role: .cancel) { viewModel.isErrorShown = false }
         } message: {
-            Text(errorMessage ?? "")
+            Text(viewModel.errorMessage ?? "")
         }
     }
 
@@ -96,8 +62,8 @@ struct PresetBar: View {
     // time display on the reference unit.
     private var selectorLabel: some View {
         HStack(spacing: 6) {
-            DirtyDot(audioUnit: audioUnit)
-            Text(title.uppercased())
+            DirtyDot(viewModel: viewModel)
+            Text(viewModel.title.uppercased())
                 .font(.system(size: 12, weight: .semibold, design: .monospaced))
                 .tracking(0.5)
                 .lineLimit(1)
@@ -128,43 +94,41 @@ struct PresetBar: View {
         List {
             Section {
                 Button {
-                    pendingSave = true
-                    showPicker = false
+                    viewModel.requestSave()
                 } label: {
                     Label("Save As…", systemImage: "square.and.arrow.down")
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(GearTheme.accent)
                 }
-                .disabled(audioUnit == nil)
+                .disabled(!viewModel.isAvailable)
                 .listRowBackground(GearTheme.chassisBottom)
             }
 
             Section("Factory") {
-                ForEach(FactoryPresets.all, id: \.number) { preset in
-                    presetRow(name: preset.name, isCurrent: currentNumber == preset.number) {
-                        selectFactory(preset.number)
+                ForEach(viewModel.factoryPresets, id: \.number) { preset in
+                    presetRow(name: preset.name, isCurrent: viewModel.currentNumber == preset.number) {
+                        viewModel.selectFactory(preset.number)
                     }
                 }
             }
 
             Section {
-                if userPresets.isEmpty {
+                if viewModel.userPresets.isEmpty {
                     Text("No user presets yet. Turn the knobs, then tap Save As…")
                         .font(.system(size: 13))
                         .foregroundStyle(GearTheme.textMuted)
                         .listRowBackground(GearTheme.chassisBottom)
                 } else {
-                    ForEach(userPresets, id: \.number) { preset in
-                        presetRow(name: preset.name, isCurrent: currentNumber == preset.number) {
-                            select(preset)
+                    ForEach(viewModel.userPresets, id: \.number) { preset in
+                        presetRow(name: preset.name, isCurrent: viewModel.currentNumber == preset.number) {
+                            viewModel.select(preset)
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button("Delete", role: .destructive) {
-                                delete(preset)
+                                viewModel.delete(preset)
                             }
                             Button("Rename") {
-                                pendingRename = preset
-                                showPicker = false
+                                viewModel.requestRename(preset)
                             }
                             .tint(GearTheme.accent)
                         }
@@ -201,79 +165,6 @@ struct PresetBar: View {
             .contentShape(Rectangle())
         }
         .listRowBackground(GearTheme.chassisBottom)
-    }
-
-    private func presentPendingSheet() {
-        if pendingSave {
-            pendingSave = false
-            saveName = suggestedSaveName
-            showSave = true
-        } else if let preset = pendingRename {
-            pendingRename = nil
-            renameText = preset.name
-            renameTarget = preset
-        }
-    }
-
-    // MARK: - Model
-
-    private var suggestedSaveName: String {
-        if let current = audioUnit?.currentPreset, current.number < 0 {
-            return current.name
-        }
-        return ""
-    }
-
-    private func reload() {
-        userPresets = (audioUnit?.userPresets ?? []).sorted {
-            $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
-        }
-        title = audioUnit?.currentPreset?.name ?? "Default"
-        currentNumber = audioUnit?.currentPreset?.number
-    }
-
-    private func selectFactory(_ number: Int) {
-        audioUnit?.currentPreset = audioUnit?.factoryPresets?.first { $0.number == number }
-        reload()
-        showPicker = false
-    }
-
-    private func select(_ preset: AUAudioUnitPreset) {
-        audioUnit?.currentPreset = preset
-        reload()
-        showPicker = false
-    }
-
-    private func save() {
-        guard let audioUnit else {
-            errorMessage = "Effect is not loaded."
-            return
-        }
-        do {
-            try audioUnit.saveCurrentStateAsUserPreset(name: saveName)
-            showSave = false
-            reload()
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-    }
-
-    private func rename(_ preset: AUAudioUnitPreset, to name: String) {
-        do {
-            try audioUnit?.renameUserPreset(preset, to: name)
-            reload()
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-    }
-
-    private func delete(_ preset: AUAudioUnitPreset) {
-        do {
-            try audioUnit?.removeUserPreset(preset)
-            reload()
-        } catch {
-            errorMessage = error.localizedDescription
-        }
     }
 }
 
@@ -324,13 +215,14 @@ private struct PresetNameSheet: View {
 }
 
 private struct DirtyDot: View {
-    let audioUnit: JJMoonAudioUnit?
+    let viewModel: PresetListViewModel
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 0.25)) { _ in
+            let isDirty = viewModel.isDirty()
             Circle()
-                .fill((audioUnit?.isPresetDirty() ?? false) ? GearTheme.lampRed : Color.white.opacity(0.06))
-                .shadow(color: (audioUnit?.isPresetDirty() ?? false) ? GearTheme.lampRed.opacity(0.8) : .clear, radius: 3)
+                .fill(isDirty ? GearTheme.lampRed : Color.white.opacity(0.06))
+                .shadow(color: isDirty ? GearTheme.lampRed.opacity(0.8) : .clear, radius: 3)
                 .frame(width: 6, height: 6)
         }
     }

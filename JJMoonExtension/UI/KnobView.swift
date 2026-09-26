@@ -3,7 +3,7 @@ import AudioToolbox
 import UIKit
 
 /// Max knob diameter for the whole panel, computed once from the panel
-/// width (see JJMoonMainView.knobDiameter(forPanelWidth:)) and read by
+/// width (see PanelMetrics.knobDiameter(forPanelWidth:)) and read by
 /// every KnobView. Warmth lays its knobs out two per row rather than three,
 /// so its slots are wider; without a shared cap its knobs would draw
 /// visibly larger than Shift's and Vibrato's.
@@ -65,7 +65,7 @@ struct KnobView: View {
                 .onLongPressGesture {
                     if helpText != nil {
                         showHelp = true
-                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        Haptics.impact(.light)
                     }
                 }
 
@@ -216,7 +216,7 @@ struct KnobView: View {
             peer.onEditingChanged(false)
         }
         param.onEditingChanged(false)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        Haptics.impact(.medium)
     }
 
     private func commitTypedValue() {

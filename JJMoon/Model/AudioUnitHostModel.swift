@@ -6,14 +6,25 @@ import UIKit
 @MainActor
 @Observable
 class AudioUnitHostModel {
+    enum LoadState {
+        case loading
+        case loaded(UIViewController)
+        case failed(String)
+    }
+
     private let playEngine = SimplePlayEngine()
-    var viewModel = AudioUnitViewModel()
-    var isPlaying = false
-    var isLoading = true
-    var playbackError: String?
+    private let entitlement: EntitlementService
+    private(set) var loadState: LoadState = .loading
+    private(set) var isPlaying = false
+    private(set) var playbackError: String?
     var source: SimplePlayEngine.Source {
         get { playEngine.source }
         set { setSource(newValue) }
+    }
+
+    /// The effect's editor, once it has loaded.
+    var editor: UIViewController? {
+        if case .loaded(let viewController) = loadState { viewController } else { nil }
     }
 
     let type = "aufx"
@@ -22,32 +33,30 @@ class AudioUnitHostModel {
 
     private var didStart = false
 
-    init() {}
+    init(entitlement: EntitlementService) {
+        self.entitlement = entitlement
+    }
 
     /// Load the AUv3 after the scene is active. The host engine is not created until Play.
     func start() async {
         guard !didStart else { return }
         didStart = true
-        isLoading = true
+        loadState = .loading
         await waitUntilActive()
 
         let viewController = await playEngine.initComponent(
             type: type,
             subType: subType,
-            manufacturer: manufacturer
+            manufacturer: manufacturer,
+            entitlement: entitlement
         )
 
-        isLoading = false
-        viewModel = AudioUnitViewModel(
-            showAudioControls: true,
-            title: "jj-moon",
-            message: viewController == nil
-                ? (playEngine.lastError ?? "Built-in effect failed to load.")
-                : "Loaded",
-            viewController: viewController
-        )
-        if viewController == nil {
-            playbackError = viewModel.message
+        if let viewController {
+            loadState = .loaded(viewController)
+        } else {
+            let message = playEngine.lastError ?? "Built-in effect failed to load."
+            loadState = .failed(message)
+            playbackError = message
         }
         // Load the effect and leave it stopped — don't start the demo loop
         // (or the microphone) until the user taps Play.

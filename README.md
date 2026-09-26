@@ -73,7 +73,7 @@ Open the app once so the Audio Unit registers.
 
 ## Factory presets
 
-Twelve, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
+Fifteen, in panel order: Default, Fallen Leaf, Fingerstyle, Piezo Soft,
 Stereo Porch, Close Mic, Moon Room, Strum, Curve Only, Nylon, Concert Hall,
 Spanish Soft, Flamenco, Rasgueado, Soleá. Nylon presets use the Nylon voice;
 Flamenco / Rasgueado / Soleá use the Flamenco voice.
@@ -109,6 +109,7 @@ JJMoonExtension/
   Parameters/               AUParameterTree, presets, StoreKit unlock
   DSP/                      C++ kernel (real-time; no Swift)
   UI/                       SwiftUI editor + GearTheme finishes
+    ViewModels/             @Observable view models (panel, preset bar)
   Common/                   AUAudioUnit / process glue
 docs/                       Marketing site + privacy (GitHub Pages)
 icon/ loop/ screenshots/    Asset generators
@@ -131,23 +132,15 @@ should be carried across by hand until a local `JJKit` package exists.
 
 ```sh
 swift icon/make-icon.swift         # -> JJMoon/Assets.xcassets/.../AppIcon.png
-screenshots/make-screenshots.sh    # -> screenshots/store/ + docs/images/
+screenshots/make-screenshots.sh    # -> screenshots/store/ (docs/images/ is curated by hand)
 screenshots/make-iap-review.sh     # -> screenshots/store/AppReview-IAP-unlock.png (640×920)
 ```
 
 `make-icon.swift` draws the panel family composition in the Moonlight
 colourway from `GearPalette.moonlight`.
 
-## To do before shipping
+## Releases
 
-Every field App Store Connect asks for is drafted in
-[APP_STORE_SUBMISSION.md](APP_STORE_SUBMISSION.md). What is left:
-
-- [ ] **App Store Connect** — new app record, new IAP for
-      `com.gerov.jjmoon.unlock`, attached to the 1.0.0 build.
-- [ ] **Distribution profiles** for `com.gerov.jjmoon` and `.AUv3`.
-- [ ] **Store link** — fill `APP_STORE_URL` in `docs/index.html`.
-- [ ] **Screenshots** — run `screenshots/make-screenshots.sh` once the panel
-      is final, then commit `screenshots/store/` and `docs/images/`.
-- [ ] **Privacy policy** — keep `docs/privacy.html` describing the shipped app.
-- [ ] **Google Search Console** — `docs/` needs its own verification file.
+**1.0.0** is live on the [App Store](https://apps.apple.com/app/id6813232689)
+(2026-09-22). **1.0.1** is the next update. Store copy, *What's New*, and the
+update checklist are in [APP_STORE_SUBMISSION.md](APP_STORE_SUBMISSION.md).

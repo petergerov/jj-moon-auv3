@@ -18,13 +18,13 @@ Two rules govern every line of copy here:
 
 | | |
 |---|---|
-| Binary | Builds clean for simulator / device. Not uploaded. |
-| App Store Connect record | **Not created.** |
-| IAP record | **Not created.** Must ship attached to v1.0.0. |
-| Screenshots | Script present; regenerate before submit. |
-| Copy | Drafted here, not entered. |
+| Live on the App Store | **1.0.0**, released 2026-09-22 — [id6813232689](https://apps.apple.com/app/id6813232689) |
+| Next build | **1.0.1** (`1`) — archive locally, upload via Xcode Organizer. Not uploaded yet. |
+| IAP record | Live; shipped with 1.0.0. Nothing to do for updates. |
+| Screenshots | Regenerated for 1.0.1 (`screenshots/store/`) — upload to replace the 1.0.0 set. |
+| Copy | Entered for 1.0.0. 1.0.1 needs only *What's New* (below). |
 | Privacy policy | At `docs/privacy.html` — keep it current. |
-| Distribution profiles | **Missing** — see *Signing* below. |
+| Distribution profiles | In place (1.0.0 shipped with them). |
 
 ---
 
@@ -39,7 +39,8 @@ rewrites `project.pbxproj` from it.
 | Extension bundle ID | `com.gerov.jjmoon.AUv3` |
 | App Group | `group.com.gerov.jjmoon` |
 | Team ID | `C9LBGZNZ6P` |
-| Version / build | `1.0.0` (`1`) |
+| App Store ID | `6813232689` |
+| Version / build | `1.0.1` (`1`) — `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in `project.yml`; both Info.plists read them |
 | Deployment target | iOS 17.0 |
 | Devices | iPhone + iPad (`TARGETED_DEVICE_FAMILY = 1,2`) |
 | Mac (Designed for iPad) | Yes |
@@ -58,11 +59,14 @@ Distinct from siblings: jj-breeze is `Jjb3`, jj-midnight is `Jjm1`.
 
 ## App information
 
-**Name** (30 char limit, currently 7):
+**Name** (30 char limit, currently 20) — as live on the store:
 
 ```
-jj-moon
+J.J.Moon AUv3 Plugin
 ```
+
+In hosts and in the app itself the product is still **jj-moon**; this is
+only the store listing's title.
 
 **Subtitle** (30 char limit, currently 28):
 
@@ -165,7 +169,19 @@ acoustic,guitar,auv3,audio unit,eq,compressor,stereo,width,reverb,piezo,fingerst
 Do not repeat words already in the name or subtitle; Apple indexes those
 anyway, so "moon" and "curve" would be wasted.
 
-**What's New:** leave empty on a first release.
+**What's New** — 1.0.1 (4000 char limit):
+
+```
+• Shape: the Steel / Nylon / Flame buttons no longer split their names
+  onto two lines on iPhone and on large iPads, and on a 13-inch iPad the
+  Shape knobs now match the size of the other sections.
+• Meters: with more than one jj-moon open in the same host, each copy
+  now shows only its own levels.
+• Lower memory use when the editor is opened and closed repeatedly.
+• Smaller fixes and internal clean-up.
+```
+
+Keep it to what a user can notice. Refactors and tooling changes stay out.
 
 ---
 
@@ -188,7 +204,8 @@ optional mic, no analytics).
 
 ## In-app purchase
 
-One non-consumable. It must be submitted **attached to the v1.0.0 build**.
+One non-consumable. It shipped attached to the 1.0.0 build and is live;
+later versions need nothing done to it.
 
 | Field | Value |
 |---|---|
@@ -262,7 +279,13 @@ for p in sorted(glob.glob("screenshots/store/*/*.png")):
 PY
 ```
 
-Expect six lines: three at 1320x2868, two at 2064x2752, all `ok`.
+Expect five lines: three at 1320x2868, two at 2064x2752, all `ok`.
+
+**Look at every image before committing — a passing run is not enough.**
+The trial is counted from the first launch on each simulator, and the date
+survives between runs; a week later the app opens on the paywall and
+`testPanel` still passes while photographing it. The script now uninstalls
+the app before each device run to prevent that, but check the images anyway.
 
 ---
 
@@ -346,25 +369,25 @@ the app can be reviewed without granting it.
 
 ---
 
-## Before you hit submit
+## Shipping an update
 
-- [ ] Paste the three URLs above with the `-auv3` suffix intact.
-- [ ] Run `screenshots/make-screenshots.sh` and check pixel sizes / EXIF.
-- [ ] Create the App Store Connect record and the IAP; attach the IAP to
-      v1.0.0.
-- [ ] Create App Store provisioning profiles for **both** bundle IDs.
-- [ ] Set `APP_STORE_URL` in `docs/index.html` once the listing exists.
+- [ ] Bump `MARKETING_VERSION` in `project.yml` (and reset
+      `CURRENT_PROJECT_VERSION` to `1`, or raise it for a rebuild of the
+      same version), then `xcodegen generate`.
 - [ ] Archive with the **jj-moon** scheme, Release config — not the
-      extension alone.
+      extension alone. Check the archive's app *and* appex both carry the
+      new version.
 - [ ] Confirm the AU registers on a real device, not just the simulator.
-- [ ] Re-read `docs/privacy.html` against the shipped feature set.
+- [ ] Regenerate screenshots if the panel changed, and look at every
+      image (see *Screenshots*).
+- [ ] Upload from Xcode Organizer; in App Store Connect create the new
+      version, pick the build, paste *What's New*, replace screenshots if
+      regenerated.
+- [ ] Re-read `docs/privacy.html` if the feature set changed.
 
 ---
 
 ## Things that are not settled
-
-**Google Search Console.** `docs/` needs its own verification file;
-jj-breeze's token cannot be reused.
 
 **Preset packs, not more DSP.** The curve engine is the product; further
 presets are the intended way to grow the listing without boxing it into one

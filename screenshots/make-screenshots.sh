@@ -54,6 +54,13 @@ run_device () {
   xcrun simctl boot "$udid" 2>/dev/null || true
   xcrun simctl bootstatus "$udid" -b >/dev/null
 
+  # Start from a fresh install. The trial is counted from the first launch
+  # on this simulator and the date survives between runs, so a week after
+  # the last run the app opens on the paywall: testPresets fails, and
+  # testPanel passes while photographing the paywall. Uninstalling the only
+  # app in the App Group also drops the group container holding that date.
+  xcrun simctl uninstall "$udid" com.gerov.jjmoon 2>/dev/null || true
+
   # The stock status bar carries the wall clock, a random carrier and
   # whatever battery the host happens to have. Apple's own 9:41 is the
   # convention and it keeps two runs a day apart pixel-identical.

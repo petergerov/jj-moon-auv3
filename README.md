@@ -48,28 +48,8 @@ launch, then a one-time unlock (`com.gerov.jjmoon.unlock`).
 
 ## Requirements
 
-- Xcode 16 or later
-- iOS 17+
-- Apple Developer team (set in Xcode Signing & Capabilities)
-- App Group **`group.com.gerov.jjmoon`** on app + extension (for shared
-  trial/unlock state)
-
-## Open and build
-
-```sh
-xcodegen generate
-open JJMoon.xcodeproj
-```
-
-**`project.yml` is the source of truth.** `xcodegen generate` rewrites
-`project.pbxproj` from it, so anything set only in Xcode's GUI is gone at the
-next run.
-
-1. Select the **jj-moon** scheme.
-2. Set your Development Team on both **JJMoon** and **JJMoonExtension**.
-3. Run on an iPhone, iPad, or simulator.
-
-Open the app once so the Audio Unit registers.
+- iPhone or iPad on iOS 17+
+- An AUv3 host (GarageBand, AUM, Logic Pro for iPad, Cubasis, …)
 
 ## Factory presets
 
@@ -80,67 +60,13 @@ Flamenco / Rasgueado / Soleá use the Flamenco voice.
 
 User presets: tap the preset window → **Save As…**; swipe left to rename or delete.
 
-## Demo parts
+## Documentation
 
-The container app bundles six acoustic recordings plus Mic and USB. Picker
-labels are bare numbers (they fit); VoiceOver gets the full name via `spokenName`.
-
-| Segment | File | Spoken name |
-|---|---|---|
-| **1** (default) | `loop/acoustic-guitar-melody-calm.mp3` | Calm melody |
-| **2** | `loop/chillin-acoustic-guitar.mp3` | Chillin |
-| **3** | `loop/acoustic-guitar-chords-loneliness.mp3` | Loneliness |
-| **4** | `loop/nylon-1.mp3` | Nylon 1 |
-| **5** | `loop/nylon-2.mp3` | Nylon 2 |
-| **6** | `loop/nylon-3.mp3` | Nylon 3 |
-| **Mic** | built-in mic | Built-in microphone |
-| **USB** | USB / line / headset input | USB audio interface |
-
-**USB** prefers a class-compliant interface (no forced speaker route). Plug the
-interface in before tapping Play.
-
-Decoded on demand rather than at launch. See `SimplePlayEngine.Source`.
-
-## Project layout
-
-```
-JJMoon/                    Container app (test host)
-JJMoonExtension/
-  Parameters/               AUParameterTree, presets, StoreKit unlock
-  DSP/                      C++ kernel (real-time; no Swift)
-  UI/                       SwiftUI editor + GearTheme finishes
-    ViewModels/             @Observable view models (panel, preset bar)
-  Common/                   AUAudioUnit / process glue
-docs/                       Marketing site + privacy (GitHub Pages)
-icon/ loop/ screenshots/    Asset generators
-sample/                     Reference recording used to shape the curve
-```
-
-`docs/` also carries one Markdown page per block — `curve.md`, `comp.md`,
-`width.md`, `space.md`, plus `master.md` for Mix, Output and metering.
-
-Only edit `Parameters`, `DSP`, and `UI` for plug-in behaviour. The render
-thread lives entirely in `JJMoonDSPKernel.hpp`.
-
-## Shared code with siblings
-
-`Common/`, the UI kit, and the trial/unlock plumbing are a copy of
-jj-midnight / jj-breeze, not a shared dependency. Fixes to shared files
-should be carried across by hand until a local `JJKit` package exists.
-
-## Generated assets
-
-```sh
-swift icon/make-icon.swift         # -> JJMoon/Assets.xcassets/.../AppIcon.png
-screenshots/make-screenshots.sh    # -> screenshots/store/ (docs/images/ is curated by hand)
-screenshots/make-iap-review.sh     # -> screenshots/store/AppReview-IAP-unlock.png (640×920)
-```
-
-`make-icon.swift` draws the panel family composition in the Moonlight
-colourway from `GearPalette.moonlight`.
+One page per block: [SHAPE](docs/curve.md), [COMP](docs/comp.md),
+[WIDTH](docs/width.md), [SPACE](docs/space.md), and [Master](docs/master.md)
+for Mix, Output and metering. Privacy policy: [docs/privacy.html](docs/privacy.html).
 
 ## Releases
 
 **1.0.0** is live on the [App Store](https://apps.apple.com/app/id6813232689)
-(2026-09-22). **1.0.1** is the next update. Store copy, *What's New*, and the
-update checklist are in [APP_STORE_SUBMISSION.md](APP_STORE_SUBMISSION.md).
+(2026-09-22). **1.0.1** is the next update.
